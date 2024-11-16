@@ -61,7 +61,7 @@ jobs:
         id: create
         uses: atlassian/gajira-create@v3
         with:
-          project: CODEPING
+          project: FLEX
           issuetype: 스토리
           summary: "[BE] ${{ github.event.issue.title }}"
           description: "${{ steps.md2jira.outputs.output-text }}"
