@@ -4,6 +4,8 @@ spring:
   config:
     import:
       - mysql.yml
+      - swagger.yml
+      - env.properties
   application:
     name: investment-service
 
@@ -17,6 +19,9 @@ server:
 
 ---
 spring.config.activate.on-profile: local
+spring:
+  config:
+    import: classpath:env.properties
 
 ---
 spring.config.activate.on-profile: dev
