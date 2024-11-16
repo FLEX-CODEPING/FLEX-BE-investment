@@ -5,7 +5,7 @@ import codeping.flex.investment.adapter.out.persistence.entity.InvestmentEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface InvestmentPersistenceMapper {
 
     InvestmentPersistenceMapper INSTANCE = Mappers.getMapper(InvestmentPersistenceMapper.class);
