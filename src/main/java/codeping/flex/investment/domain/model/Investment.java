@@ -30,4 +30,23 @@ public class Investment {
         this.profit = BigDecimal.ZERO;
     }
 
+    /**
+     * 해당 주식에 대한 최근 거래 내역을 참조하여,
+     * 주어진 수량만큼 주식을 판매하고, 판매 가격에 따라 총 판매 금액 및 이익을 계산합니다.
+     *
+     * @param sellAmount 판매할 주식의 수량
+     * @param sellPrice  주식의 판매 가격
+     */
+    public void sellStock(int sellAmount, BigDecimal sellPrice) {
+        // 총 판매 금액을 계산
+        BigDecimal sellTotalPrice = sellPrice.multiply(new BigDecimal(sellAmount));
+        BigDecimal profit = (sellPrice.subtract(this.price)).multiply(new BigDecimal(sellAmount));
+
+        // 보유 주식 수량에서 판매한 수량을 차감
+        this.amount -= sellAmount;
+        this.profit = profit;
+        this.totalPrice = sellTotalPrice;
+
+        this.investType = InvestType.SELL;
+    }
 }
