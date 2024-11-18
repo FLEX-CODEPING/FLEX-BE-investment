@@ -1,7 +1,7 @@
 package codeping.flex.investment.adapter.out.persistence.mapper;
 
+import codeping.flex.investment.adapter.out.persistence.entity.transaction.InvestmentEntity;
 import codeping.flex.investment.domain.model.Investment;
-import codeping.flex.investment.adapter.out.persistence.entity.InvestmentEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
