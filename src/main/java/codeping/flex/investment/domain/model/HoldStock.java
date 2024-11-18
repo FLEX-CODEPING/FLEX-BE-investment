@@ -16,16 +16,16 @@ public class HoldStock {
     private String stockCode;
     private long totalHoldings; // 총 보유량
     private HoldStatus holdStatus; // 보유 상태
-    private Long investmentId; // 최근 매도/매수 내역
+    private Investment recentInvestment; // 최근 매도/매수 내역
 
     @Builder
-    public HoldStock(Long userId, String corpName, String stockCode, long totalHoldings, Long investmentId) {
+    public HoldStock(Long userId, String corpName, String stockCode, long totalHoldings, Investment recentInvestment) {
         this.userId = userId;
         this.corpName = corpName;
         this.stockCode = stockCode;
         this.totalHoldings = totalHoldings;
         this.holdStatus = HoldStatus.HOLDING;
-        this.investmentId = investmentId;
+        this.recentInvestment = recentInvestment;
     }
 
     public void addHoldings(long amount) {
@@ -46,9 +46,9 @@ public class HoldStock {
 
     /**
      * 해당 종목에 대한 최신 투자 데이터를 업데이트합니다.
-     * @param investmentId
+     * @param r
      */
-    public void setLatestInvestment(Long investmentId) {
-        this.investmentId = investmentId;
+    public void setLatestInvestment(Investment recentInvestment) {
+        this.recentInvestment = recentInvestment;
     }
 }
