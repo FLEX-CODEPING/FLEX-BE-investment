@@ -21,9 +21,8 @@ public class TransactionEntity extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private UserEntity user;
+    @Column(nullable = false)
+    private Long userId;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "investment_id")
@@ -43,8 +42,8 @@ public class TransactionEntity extends BaseTimeEntity {
     private BigDecimal balance;
 
     @Builder
-    public TransactionEntity(UserEntity userEntity, InvestmentEntity investmentEntity, PointEntity pointEntity, BigDecimal totalProfit, BigDecimal balance) {
-        this.user = userEntity;
+    public TransactionEntity(Long userId, InvestmentEntity investmentEntity, PointEntity pointEntity, BigDecimal totalProfit, BigDecimal balance) {
+        this.userId = userId;
         this.investment = investmentEntity;
         this.point = pointEntity;
         this.totalProfit = totalProfit;

@@ -20,9 +20,8 @@ public class PointEntity extends BaseTimeEntity {
     @Column(nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private UserEntity userEntity;
+    @Column(nullable = false)
+    private Long userId;
 
     @Column(nullable = false)
     private long point;
@@ -32,8 +31,8 @@ public class PointEntity extends BaseTimeEntity {
     private PointType type;
 
     @Builder
-    public PointEntity(UserEntity userEntity, long point, PointType pointType) {
-        this.userEntity = userEntity;
+    public PointEntity(Long userId, long point, PointType pointType) {
+        this.userId = userId;
         this.point = point;
         this.type = pointType;
     }

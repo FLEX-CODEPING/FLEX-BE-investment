@@ -21,9 +21,8 @@ public class InvestmentEntity extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private UserEntity user;
+    @Column(nullable = false)
+    private Long userId;
 
     @Column
     private String corpName;
@@ -49,8 +48,8 @@ public class InvestmentEntity extends BaseTimeEntity {
     private BigDecimal profit;
 
     @Builder
-    public InvestmentEntity(UserEntity userEntity, String stockCode, String corpName, InvestType investType, int amount, BigDecimal price) {
-        this.user = userEntity;
+    public InvestmentEntity(Long userId, String stockCode, String corpName, InvestType investType, int amount, BigDecimal price) {
+        this.userId = userId;
         this.stockCode = stockCode;
         this.corpName = corpName;
         this.investType = investType;

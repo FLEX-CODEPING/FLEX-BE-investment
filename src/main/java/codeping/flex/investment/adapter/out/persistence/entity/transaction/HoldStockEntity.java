@@ -36,15 +36,16 @@ public class HoldStockEntity extends BaseTimeEntity {
     private HoldStatus holdStatus; // 보유 상태
 
     @OneToOne
-    @JoinColumn(name = "recentInvestment", nullable = false)
+    @JoinColumn(name = "recent_investment_id", nullable = false)
     private InvestmentEntity recentInvestment;
 
     @Builder
-    public HoldStockEntity(Long userId, String stockCode, String corpName, long totalHoldings, HoldStatus holdStatus) {
+    public HoldStockEntity(Long userId, String stockCode, String corpName, long totalHoldings, HoldStatus holdStatus, InvestmentEntity recentInvestmentEntity) {
         this.userId = userId;
         this.stockCode = stockCode;
         this.corpName = corpName;
         this.totalHoldings = totalHoldings;
         this.holdStatus = holdStatus;
+        this.recentInvestment = recentInvestmentEntity;
     }
 }

@@ -24,9 +24,8 @@ public class BackTestEntity extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private UserEntity user;
+    @Column(nullable = false)
+    private Long userId;
 
     @Column(nullable = false)
     private String corpName;
@@ -58,10 +57,10 @@ public class BackTestEntity extends BaseTimeEntity {
     private BigDecimal result;
 
     @Builder
-    public BackTestEntity(UserEntity userEntity, String stockCode, String corpName, InvestType investType,
+    public BackTestEntity(Long userId, String stockCode, String corpName, InvestType investType,
                           BackTestPeriodType backTestPeriodType, LocalDate startDate, LocalDate endDate,
                           Integer amount, BigDecimal totalPrice, BigDecimal result) {
-        this.user = userEntity;
+        this.userId = userId;
         this.stockCode = stockCode;
         this.corpName = corpName;
         this.investType = investType;

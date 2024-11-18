@@ -19,9 +19,8 @@ public class UserRecentTransactionEntity extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private UserEntity user;
+    @Column(nullable = false)
+    private Long userId;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "transaction_id", nullable = false)
@@ -31,8 +30,8 @@ public class UserRecentTransactionEntity extends BaseTimeEntity {
     private LocalDateTime recentTransactionAt;
 
     @Builder
-    public UserRecentTransactionEntity(UserEntity userEntity, TransactionEntity transactionEntity){
-        this.user = userEntity;
+    public UserRecentTransactionEntity(Long userId, TransactionEntity transactionEntity){
+        this.userId = userId;
         this.transaction = transactionEntity;
     }
 
