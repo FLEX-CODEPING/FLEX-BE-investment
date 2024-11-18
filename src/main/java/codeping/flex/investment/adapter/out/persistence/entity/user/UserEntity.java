@@ -1,6 +1,6 @@
 package codeping.flex.investment.adapter.out.persistence.entity.user;
 
-import codeping.flex.investment.adapter.out.persistence.entity.BaseTimeEntity;
+import codeping.flex.investment.adapter.out.persistence.entity.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
