@@ -1,0 +1,40 @@
+package codeping.flex.investment.adapter.out.persistence.entity.transaction;
+
+import codeping.flex.investment.adapter.out.persistence.converter.PointTypeConverter;
+import codeping.flex.investment.adapter.out.persistence.entity.common.BaseTimeEntity;
+import codeping.flex.investment.domain.constant.PointType;
+import codeping.flex.investment.adapter.out.persistence.entity.user.UserEntity;
+import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "point")
+public class PointEntity extends BaseTimeEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity userEntity;
+
+    @Column(nullable = false)
+    private long point;
+
+    @Convert(converter = PointTypeConverter.class)
+    @Column(nullable = false)
+    private PointType type;
+
+    @Builder
+    public PointEntity(UserEntity userEntity, long point, PointType pointType) {
+        this.userEntity = userEntity;
+        this.point = point;
+        this.type = pointType;
+    }
+}
