@@ -8,6 +8,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Comment;
 
 @Entity
 @Getter
@@ -28,12 +29,14 @@ public class HoldStockEntity extends BaseTimeEntity {
     @Column(nullable = false)
     private String stockCode;
 
+    @Comment("총 보유량")
     @Column(nullable = false)
-    private long totalHoldings; // 총 보유량
+    private long totalHoldings;
 
+    @Comment("보유 상태")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private HoldStatus holdStatus; // 보유 상태
+    private HoldStatus holdStatus;
 
     @OneToOne
     @JoinColumn(name = "recent_investment_id", nullable = false)

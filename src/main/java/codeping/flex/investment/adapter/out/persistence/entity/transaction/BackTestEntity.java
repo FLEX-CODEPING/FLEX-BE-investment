@@ -34,7 +34,7 @@ public class BackTestEntity extends BaseTimeEntity {
     private String stockCode;
 
     @Enumerated(EnumType.STRING)
-    @Column()
+    @Column
     private InvestType investType;
 
     @Convert(converter = BackTestPeriodConverter.class)
