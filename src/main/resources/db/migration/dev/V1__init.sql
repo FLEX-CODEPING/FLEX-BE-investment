@@ -1,3 +1,5 @@
+SET foreign_key_checks = 0;
+
 --
 -- Table structure for table `back_test`
 --
