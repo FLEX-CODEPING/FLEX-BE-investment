@@ -1,12 +1,13 @@
-package codeping.flex.investment.adapter.out.persistence.entity.transaction;
+package codeping.flex.investment.adapter.out.persistence.entity.stockportfolio;
 
 import codeping.flex.investment.adapter.out.persistence.entity.common.BaseTimeEntity;
-import codeping.flex.investment.adapter.out.persistence.entity.user.UserEntity;
+import codeping.flex.investment.adapter.out.persistence.entity.point.PointEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.DynamicInsert;
 
 import java.math.BigDecimal;
@@ -17,9 +18,10 @@ import java.math.BigDecimal;
 @Table(name = "transaction")
 @DynamicInsert
 public class TransactionEntity extends BaseTimeEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long transactionId;
 
     @Column(nullable = false)
     private Long userId;
@@ -32,17 +34,19 @@ public class TransactionEntity extends BaseTimeEntity {
     @JoinColumn(name = "point_id")
     private PointEntity point;
 
-    // 총 수익
+    @Comment("총 수익")
     @Column(nullable = false)
     private BigDecimal totalProfit;
 
-    // 잔고
+    @Comment("잔고")
     @Column(nullable = false)
-//    @ColumnDefault("'0'")
     private BigDecimal balance;
 
     @Builder
-    public TransactionEntity(Long userId, InvestmentEntity investmentEntity, PointEntity pointEntity, BigDecimal totalProfit, BigDecimal balance) {
+    public TransactionEntity(
+            Long userId, InvestmentEntity investmentEntity, PointEntity pointEntity,
+            BigDecimal totalProfit, BigDecimal balance
+    ) {
         this.userId = userId;
         this.investment = investmentEntity;
         this.point = pointEntity;

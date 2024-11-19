@@ -1,11 +1,11 @@
-package codeping.flex.investment.domain.model;
+package codeping.flex.investment.domain.model.point;
 
 import codeping.flex.investment.domain.constant.PointType;
 import lombok.Builder;
 
 public class Point {
 
-    private Long id;
+    private Long pointId;
     private Long userId;
     private long pointAmount;
     private PointType pointType;

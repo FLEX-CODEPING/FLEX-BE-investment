@@ -1,9 +1,8 @@
-package codeping.flex.investment.adapter.out.persistence.entity.transaction;
+package codeping.flex.investment.adapter.out.persistence.entity.stockportfolio;
 
 import codeping.flex.investment.adapter.out.persistence.converter.BackTestPeriodConverter;
 import codeping.flex.investment.adapter.out.persistence.entity.common.BaseTimeEntity;
 import codeping.flex.investment.domain.constant.BackTestPeriodType;
-import codeping.flex.investment.adapter.out.persistence.entity.user.UserEntity;
 import codeping.flex.investment.domain.constant.InvestType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -22,7 +21,7 @@ public class BackTestEntity extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long backTestId;
 
     @Column(nullable = false)
     private Long userId;
@@ -34,7 +33,7 @@ public class BackTestEntity extends BaseTimeEntity {
     private String stockCode;
 
     @Enumerated(EnumType.STRING)
-    @Column()
+    @Column
     private InvestType investType;
 
     @Convert(converter = BackTestPeriodConverter.class)
@@ -57,9 +56,11 @@ public class BackTestEntity extends BaseTimeEntity {
     private BigDecimal result;
 
     @Builder
-    public BackTestEntity(Long userId, String stockCode, String corpName, InvestType investType,
-                          BackTestPeriodType backTestPeriodType, LocalDate startDate, LocalDate endDate,
-                          Integer amount, BigDecimal totalPrice, BigDecimal result) {
+    public BackTestEntity(
+            Long userId, String stockCode, String corpName, InvestType investType,
+            BackTestPeriodType backTestPeriodType, LocalDate startDate, LocalDate endDate,
+            Integer amount, BigDecimal totalPrice, BigDecimal result
+    ) {
         this.userId = userId;
         this.stockCode = stockCode;
         this.corpName = corpName;

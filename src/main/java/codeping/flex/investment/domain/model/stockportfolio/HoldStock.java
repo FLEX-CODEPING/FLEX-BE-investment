@@ -1,6 +1,7 @@
-package codeping.flex.investment.domain.model;
+package codeping.flex.investment.domain.model.stockportfolio;
 
 import codeping.flex.investment.domain.constant.HoldStatus;
+import codeping.flex.investment.domain.model.common.BaseTime;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,9 +9,9 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class HoldStock {
+public class HoldStock extends BaseTime {
 
-    private Long id;
+    private Long holdStockId;
     private Long userId;
     private String corpName;
     private String stockCode;
@@ -46,7 +47,6 @@ public class HoldStock {
 
     /**
      * 해당 종목에 대한 최신 투자 데이터를 업데이트합니다.
-     * @param r
      */
     public void setLatestInvestment(Investment recentInvestment) {
         this.recentInvestment = recentInvestment;

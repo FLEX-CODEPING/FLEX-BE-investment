@@ -1,5 +1,4 @@
-
-package codeping.flex.investment.adapter.out.persistence.entity.transaction;
+package codeping.flex.investment.adapter.out.persistence.entity.stockportfolio;
 
 import codeping.flex.investment.adapter.out.persistence.entity.common.BaseTimeEntity;
 import codeping.flex.investment.domain.constant.HoldStatus;
@@ -8,6 +7,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Comment;
 
 @Entity
 @Getter
@@ -17,7 +17,7 @@ public class HoldStockEntity extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long holdStockId;
 
     @Column(nullable = false)
     private Long userId;
@@ -28,19 +28,24 @@ public class HoldStockEntity extends BaseTimeEntity {
     @Column(nullable = false)
     private String stockCode;
 
+    @Comment("총 보유량")
     @Column(nullable = false)
-    private long totalHoldings; // 총 보유량
+    private long totalHoldings;
 
+    @Comment("보유 상태")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private HoldStatus holdStatus; // 보유 상태
+    private HoldStatus holdStatus;
 
     @OneToOne
     @JoinColumn(name = "recent_investment_id", nullable = false)
     private InvestmentEntity recentInvestment;
 
     @Builder
-    public HoldStockEntity(Long userId, String stockCode, String corpName, long totalHoldings, HoldStatus holdStatus, InvestmentEntity recentInvestmentEntity) {
+    public HoldStockEntity(
+            Long userId, String stockCode, String corpName,
+            long totalHoldings, HoldStatus holdStatus, InvestmentEntity recentInvestmentEntity
+    ) {
         this.userId = userId;
         this.stockCode = stockCode;
         this.corpName = corpName;
