@@ -1,6 +1,6 @@
 package codeping.flex.investment.adapter.out.persistence;
 
-import codeping.flex.investment.adapter.out.persistence.entity.transaction.HoldStockEntity;
+import codeping.flex.investment.adapter.out.persistence.entity.stockportfolio.HoldStockEntity;
 import codeping.flex.investment.adapter.out.persistence.mapper.HoldStockPersistenceMapper;
 import codeping.flex.investment.adapter.out.persistence.repository.HoldStockRepository;
 import codeping.flex.investment.application.ports.out.HoldStockOutPort;

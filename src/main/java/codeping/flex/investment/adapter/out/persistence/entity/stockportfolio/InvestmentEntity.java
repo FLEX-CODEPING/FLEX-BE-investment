@@ -1,8 +1,7 @@
-package codeping.flex.investment.adapter.out.persistence.entity.transaction;
+package codeping.flex.investment.adapter.out.persistence.entity.stockportfolio;
 
 import codeping.flex.investment.adapter.out.persistence.entity.common.BaseTimeEntity;
 import codeping.flex.investment.domain.constant.InvestType;
-import codeping.flex.investment.adapter.out.persistence.entity.user.UserEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -20,7 +19,7 @@ public class InvestmentEntity extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long investmentId;
 
     @Column(nullable = false)
     private Long userId;

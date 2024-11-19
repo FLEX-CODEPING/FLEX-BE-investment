@@ -1,5 +1,4 @@
-
-package codeping.flex.investment.adapter.out.persistence.entity.transaction;
+package codeping.flex.investment.adapter.out.persistence.entity.stockportfolio;
 
 import codeping.flex.investment.adapter.out.persistence.entity.common.BaseTimeEntity;
 import codeping.flex.investment.domain.constant.HoldStatus;
@@ -18,7 +17,7 @@ public class HoldStockEntity extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long holdStockId;
 
     @Column(nullable = false)
     private Long userId;
@@ -43,7 +42,14 @@ public class HoldStockEntity extends BaseTimeEntity {
     private InvestmentEntity recentInvestment;
 
     @Builder
-    public HoldStockEntity(Long userId, String stockCode, String corpName, long totalHoldings, HoldStatus holdStatus, InvestmentEntity recentInvestmentEntity) {
+    public HoldStockEntity(
+            Long userId,
+            String stockCode,
+            String corpName,
+            long totalHoldings,
+            HoldStatus holdStatus,
+            InvestmentEntity recentInvestmentEntity
+    ) {
         this.userId = userId;
         this.stockCode = stockCode;
         this.corpName = corpName;

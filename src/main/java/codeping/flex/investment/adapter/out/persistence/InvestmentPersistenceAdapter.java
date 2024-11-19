@@ -1,6 +1,6 @@
 package codeping.flex.investment.adapter.out.persistence;
 
-import codeping.flex.investment.adapter.out.persistence.entity.transaction.InvestmentEntity;
+import codeping.flex.investment.adapter.out.persistence.entity.stockportfolio.InvestmentEntity;
 import codeping.flex.investment.adapter.out.persistence.mapper.InvestmentPersistenceMapper;
 import codeping.flex.investment.adapter.out.persistence.repository.InvestmentRepository;
 import codeping.flex.investment.application.ports.out.InvestmentOutPort;

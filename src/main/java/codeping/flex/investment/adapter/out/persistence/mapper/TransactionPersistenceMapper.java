@@ -1,8 +1,6 @@
 package codeping.flex.investment.adapter.out.persistence.mapper;
 
-import codeping.flex.investment.adapter.out.persistence.entity.transaction.HoldStockEntity;
-import codeping.flex.investment.adapter.out.persistence.entity.transaction.TransactionEntity;
-import codeping.flex.investment.domain.model.HoldStock;
+import codeping.flex.investment.adapter.out.persistence.entity.stockportfolio.TransactionEntity;
 import codeping.flex.investment.domain.model.Transaction;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

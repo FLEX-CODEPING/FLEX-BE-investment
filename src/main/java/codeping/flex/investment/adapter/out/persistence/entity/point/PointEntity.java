@@ -1,9 +1,8 @@
-package codeping.flex.investment.adapter.out.persistence.entity.transaction;
+package codeping.flex.investment.adapter.out.persistence.entity.point;
 
 import codeping.flex.investment.adapter.out.persistence.converter.PointTypeConverter;
 import codeping.flex.investment.adapter.out.persistence.entity.common.BaseTimeEntity;
 import codeping.flex.investment.domain.constant.PointType;
-import codeping.flex.investment.adapter.out.persistence.entity.user.UserEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -19,7 +18,7 @@ public class PointEntity extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
-    private Long id;
+    private Long pointId;
 
     @Column(nullable = false)
     private Long userId;

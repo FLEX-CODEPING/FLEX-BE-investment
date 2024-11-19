@@ -1,6 +1,6 @@
 package codeping.flex.investment.adapter.out.persistence.repository;
 
-import codeping.flex.investment.adapter.out.persistence.entity.transaction.HoldStockEntity;
+import codeping.flex.investment.adapter.out.persistence.entity.stockportfolio.HoldStockEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

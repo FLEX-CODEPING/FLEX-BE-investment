@@ -1,7 +1,6 @@
-package codeping.flex.investment.adapter.out.persistence.entity.transaction;
+package codeping.flex.investment.adapter.out.persistence.entity.stockportfolio;
 
 import codeping.flex.investment.adapter.out.persistence.entity.common.BaseTimeEntity;
-import codeping.flex.investment.adapter.out.persistence.entity.user.UserEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -13,12 +12,12 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "user_recent_transaction")
-public class UserRecentTransactionEntity extends BaseTimeEntity {
+@Table(name = "recent_transaction")
+public class RecentTransactionEntity extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long recentTransactionId;
 
     @Column(nullable = false)
     private Long userId;
@@ -31,7 +30,7 @@ public class UserRecentTransactionEntity extends BaseTimeEntity {
     private LocalDateTime recentTransactionAt;
 
     @Builder
-    public UserRecentTransactionEntity(Long userId, TransactionEntity transactionEntity){
+    public RecentTransactionEntity(Long userId, TransactionEntity transactionEntity){
         this.userId = userId;
         this.transaction = transactionEntity;
     }
