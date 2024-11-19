@@ -1,14 +1,16 @@
-package codeping.flex.investment.domain.model;
+package codeping.flex.investment.domain.model.stockportfolio;
 
 import codeping.flex.investment.domain.constant.InvestType;
+import codeping.flex.investment.domain.model.common.BaseTime;
 import lombok.*;
 
 import java.math.BigDecimal;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Investment {
-    private Long id;
+public class Investment extends BaseTime {
+
+    private Long investmentId;
     private Long userId;
     private String corpName;
     private String stockCode;

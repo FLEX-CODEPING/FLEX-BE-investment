@@ -1,5 +1,6 @@
-package codeping.flex.investment.domain.model;
+package codeping.flex.investment.domain.model.stockportfolio;
 
+import codeping.flex.investment.domain.model.common.BaseTime;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,8 +10,9 @@ import java.math.BigDecimal;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Transaction {
-    private Long id;
+public class Transaction extends BaseTime {
+
+    private Long transactionId;
     private Long userId;
     private Investment investment;
     private Long pointId;

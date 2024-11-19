@@ -1,5 +1,6 @@
-package codeping.flex.investment.domain.model;
+package codeping.flex.investment.domain.model.stockportfolio;
 
+import codeping.flex.investment.domain.model.common.BaseTime;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -7,13 +8,14 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UserRecentTransaction {
-    private Long id;
+public class RecentTransaction extends BaseTime {
+
+    private Long recentTransactionId;
     private Long userId;
     private Transaction transaction;
 
     @Builder
-    public UserRecentTransaction(Long userId, Transaction transaction) {
+    public RecentTransaction(Long userId, Transaction transaction) {
         this.userId = userId;
         this.transaction = transaction;
     }

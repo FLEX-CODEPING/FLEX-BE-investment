@@ -48,7 +48,9 @@ public class InvestmentEntity extends BaseTimeEntity {
     private BigDecimal profit;
 
     @Builder
-    public InvestmentEntity(Long userId, String stockCode, String corpName, InvestType investType, int amount, BigDecimal price) {
+    public InvestmentEntity(
+            Long userId, String stockCode, String corpName, InvestType investType, int amount, BigDecimal price
+    ) {
         this.userId = userId;
         this.stockCode = stockCode;
         this.corpName = corpName;

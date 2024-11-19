@@ -56,9 +56,11 @@ public class BackTestEntity extends BaseTimeEntity {
     private BigDecimal result;
 
     @Builder
-    public BackTestEntity(Long userId, String stockCode, String corpName, InvestType investType,
-                          BackTestPeriodType backTestPeriodType, LocalDate startDate, LocalDate endDate,
-                          Integer amount, BigDecimal totalPrice, BigDecimal result) {
+    public BackTestEntity(
+            Long userId, String stockCode, String corpName, InvestType investType,
+            BackTestPeriodType backTestPeriodType, LocalDate startDate, LocalDate endDate,
+            Integer amount, BigDecimal totalPrice, BigDecimal result
+    ) {
         this.userId = userId;
         this.stockCode = stockCode;
         this.corpName = corpName;

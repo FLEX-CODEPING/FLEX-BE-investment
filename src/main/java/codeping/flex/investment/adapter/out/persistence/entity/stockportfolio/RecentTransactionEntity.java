@@ -30,7 +30,7 @@ public class RecentTransactionEntity extends BaseTimeEntity {
     private LocalDateTime recentTransactionAt;
 
     @Builder
-    public RecentTransactionEntity(Long userId, TransactionEntity transactionEntity){
+    public RecentTransactionEntity(Long userId, TransactionEntity transactionEntity) {
         this.userId = userId;
         this.transaction = transactionEntity;
     }

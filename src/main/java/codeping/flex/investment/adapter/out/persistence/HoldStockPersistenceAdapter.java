@@ -4,7 +4,7 @@ import codeping.flex.investment.adapter.out.persistence.entity.stockportfolio.Ho
 import codeping.flex.investment.adapter.out.persistence.mapper.HoldStockPersistenceMapper;
 import codeping.flex.investment.adapter.out.persistence.repository.HoldStockRepository;
 import codeping.flex.investment.application.ports.out.HoldStockOutPort;
-import codeping.flex.investment.domain.model.HoldStock;
+import codeping.flex.investment.domain.model.stockportfolio.HoldStock;
 import codeping.flex.investment.global.annotation.architecture.PersistenceAdapter;
 import lombok.RequiredArgsConstructor;
 

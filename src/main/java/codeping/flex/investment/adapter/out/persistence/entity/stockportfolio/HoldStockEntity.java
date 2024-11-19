@@ -43,12 +43,8 @@ public class HoldStockEntity extends BaseTimeEntity {
 
     @Builder
     public HoldStockEntity(
-            Long userId,
-            String stockCode,
-            String corpName,
-            long totalHoldings,
-            HoldStatus holdStatus,
-            InvestmentEntity recentInvestmentEntity
+            Long userId, String stockCode, String corpName,
+            long totalHoldings, HoldStatus holdStatus, InvestmentEntity recentInvestmentEntity
     ) {
         this.userId = userId;
         this.stockCode = stockCode;

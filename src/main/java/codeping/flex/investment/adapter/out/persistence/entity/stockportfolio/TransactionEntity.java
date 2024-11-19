@@ -44,11 +44,8 @@ public class TransactionEntity extends BaseTimeEntity {
 
     @Builder
     public TransactionEntity(
-            Long userId,
-            InvestmentEntity investmentEntity,
-            PointEntity pointEntity,
-            BigDecimal totalProfit,
-            BigDecimal balance
+            Long userId, InvestmentEntity investmentEntity, PointEntity pointEntity,
+            BigDecimal totalProfit, BigDecimal balance
     ) {
         this.userId = userId;
         this.investment = investmentEntity;
