@@ -6,10 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
-public interface InvestmentPersistenceMapper {
+public interface InvestmentPersistenceMapper extends EntityMapper<InvestmentEntity, Investment> {
 
     InvestmentPersistenceMapper INSTANCE = Mappers.getMapper(InvestmentPersistenceMapper.class);
-
-    InvestmentEntity toInvestmentEntity(Investment investment);
-    Investment toInvestment(InvestmentEntity entity);
 }

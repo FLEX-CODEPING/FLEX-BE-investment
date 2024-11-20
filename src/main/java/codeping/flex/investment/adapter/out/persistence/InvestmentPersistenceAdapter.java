@@ -19,9 +19,9 @@ public class InvestmentPersistenceAdapter implements InvestmentOutPort {
 
     @Override
     public Investment saveInvestment(final Investment investment) {
-        InvestmentEntity investmentEntity = this.investmentPersistenceMapper.toInvestmentEntity(investment);
+        InvestmentEntity investmentEntity = this.investmentPersistenceMapper.toEntity(investment);
         InvestmentEntity savedEntity = this.investmentRepository.save(investmentEntity);
-        return this.investmentPersistenceMapper.toInvestment(savedEntity);
+        return this.investmentPersistenceMapper.toDomain(savedEntity);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class InvestmentPersistenceAdapter implements InvestmentOutPort {
             return Optional.empty();
         }
 
-        final Investment investment = this.investmentPersistenceMapper.toInvestment(investmentEntity.get());
+        final Investment investment = this.investmentPersistenceMapper.toDomain(investmentEntity.get());
         return Optional.of(investment);
     }
 }
