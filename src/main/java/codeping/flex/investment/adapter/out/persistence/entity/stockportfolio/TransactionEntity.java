@@ -44,11 +44,11 @@ public class TransactionEntity extends BaseTimeEntity {
 
     @Builder
     public TransactionEntity(
-            Long userId, InvestmentEntity investmentEntity, PointEntity pointEntity,
+            Long userId, InvestmentEntity investment, PointEntity pointEntity,
             BigDecimal totalProfit, BigDecimal balance
     ) {
         this.userId = userId;
-        this.investment = investmentEntity;
+        this.investment = investment;
         this.point = pointEntity;
         this.totalProfit = totalProfit;
         this.balance = balance;
