@@ -1,4 +1,4 @@
-package codeping.flex.investment.adapter.out.persistence.entity;
+package codeping.flex.investment.adapter.out.persistence.entity.common;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
