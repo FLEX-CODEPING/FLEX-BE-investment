@@ -1,6 +1,7 @@
 package codeping.flex.investment.application.service.aggregate;
 
 import codeping.flex.investment.adapter.in.web.data.investment.request.BuyStockRequest;
+import codeping.flex.investment.adapter.in.web.data.investment.response.BuyStockResponse;
 import codeping.flex.investment.application.ports.in.investment.*;
 import codeping.flex.investment.domain.model.stockportfolio.HoldStock;
 import codeping.flex.investment.domain.model.stockportfolio.Investment;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import java.math.BigDecimal;
 import java.util.Optional;
 
+import static codeping.flex.investment.application.mapper.TradingResponseMapper.mapToBuyStockResponse;
 import static codeping.flex.investment.domain.exception.InvestmentErrorCode.BALANCE_NOT_SUFFICIENT;
 
 @ApplicationService
@@ -25,7 +27,7 @@ public class TradingService implements TradingUseCase {
     private final HoldStockUseCase holdStockUseCase;
 
     @Override
-    public void buyStocks(Long userId, BuyStockRequest buyStockRequest) {
+    public BuyStockResponse buyStocks(Long userId, BuyStockRequest buyStockRequest) {
         // 최신 거래 내역 및 잔고 조회
         RecentTransaction recentTransaction = recentTransactionUseCase.getRecentTransactionByUserId(userId);
         BigDecimal currentBalance = recentTransaction.getTransaction().getBalance();
@@ -36,13 +38,15 @@ public class TradingService implements TradingUseCase {
         validateSufficientBalance(currentBalance, totalPrice);
 
         // 매수 내역 저장
-        Transaction transaction = saveInvestmentAndTransaction(userId, buyStockRequest, currentBalance, currentTotalProfit);
+        Transaction transaction = saveInvestmentAndTransaction(userId, buyStockRequest, currentBalance, currentTotalProfit, totalPrice);
 
         // 보유 주식 업데이트
         updateHoldStocks(userId, buyStockRequest, transaction.getInvestment());
 
         // 최신 거래내역 업데이트
         recentTransactionUseCase.updateRecentTransaction(userId, transaction);
+
+        return mapToBuyStockResponse(transaction.getInvestment(), transaction.getBalance());
     }
 
     /**
@@ -67,9 +71,9 @@ public class TradingService implements TradingUseCase {
      * @return Transaction 객체
      */
     private Transaction saveInvestmentAndTransaction(
-            Long userId, BuyStockRequest buyStockRequest, BigDecimal currentBalance, BigDecimal currentTotalProfit
+            Long userId, BuyStockRequest buyStockRequest, BigDecimal currentBalance, BigDecimal currentTotalProfit, BigDecimal totalPrice
     ) {
-        Investment investment = investmentUseCase.saveBuyTypeInvestment(userId, buyStockRequest);
+        Investment investment = investmentUseCase.saveBuyTypeInvestment(userId, buyStockRequest, totalPrice);
         return transactionUseCase.saveInvestmentTransaction(userId, investment, currentTotalProfit, currentBalance);
     }
 
