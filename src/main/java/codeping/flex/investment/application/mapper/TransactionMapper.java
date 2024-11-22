@@ -12,20 +12,29 @@ public class TransactionMapper {
         throw new IllegalArgumentException();
     }
 
-    public static Transaction mapToInvestmentTransaction(Long userId, Investment investment, BigDecimal totalProfit, BigDecimal balance) {
+    /**
+     * 매수에 대한 거래 내역을 생성합니다.
+     * totalProfit 은 그대로 유지하며, balance 에서 매수 금액을 차감합니다.
+     */
+    public static Transaction mapToInvestmentTransaction(Long userId, Investment investment, BigDecimal currentTotalProfit, BigDecimal currentBalance) {
         return Transaction.builder()
                 .userId(userId)
                 .investment(investment)
-                .totalProfit(totalProfit)
-                .balance(balance)
+                .totalProfit(currentTotalProfit)
+                .balance(currentBalance.subtract(investment.getTotalPrice()))
                 .build();
     }
 
-    public static Transaction mapToPointTransaction(Long userId, Point point, BigDecimal balance) {
+    /**
+     * 크레딧 적립 또는 차감에 대한 거래 내역을 생성합니다.
+     * totalProfit 은 그대로 유지하며, balance 에서 크레딧을 적립 또는 차감합니다.
+     */
+    public static Transaction mapToPointTransaction(Long userId, Point point, BigDecimal currentTotalProfit, BigDecimal currentBalance) {
         return Transaction.builder()
                 .userId(userId)
                 .pointId(point.getPointId())
-                .balance(balance)
+                .totalProfit(currentTotalProfit)
+                .balance(currentBalance.add(BigDecimal.valueOf(point.getPointAmount())))
                 .build();
     }
 }

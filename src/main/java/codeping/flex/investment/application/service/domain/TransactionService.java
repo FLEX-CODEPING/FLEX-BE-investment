@@ -18,15 +18,13 @@ public class TransactionService implements TransactionUseCase {
 
     private final TransactionOutPort transactionOutPort;
 
-    public Transaction saveInvestmentTransaction(
-            Long userId, Investment investment, BigDecimal totalProfit, BigDecimal balance
-    ) {
-        Transaction transaction = mapToInvestmentTransaction(userId, investment, totalProfit, balance);
+    public Transaction saveInvestmentTransaction(Long userId, Investment investment, BigDecimal currentTotalProfit, BigDecimal currentBalance) {
+        Transaction transaction = mapToInvestmentTransaction(userId, investment, currentTotalProfit, currentBalance);
         return transactionOutPort.saveTransaction(transaction);
     }
 
-    public Transaction savePointTransaction(Long userId, Point point, BigDecimal balance) {
-        Transaction transaction = mapToPointTransaction(userId, point, balance);
+    public Transaction savePointTransaction(Long userId, Point point, BigDecimal currentTotalProfit, BigDecimal currentBalance) {
+        Transaction transaction = mapToPointTransaction(userId, point, currentTotalProfit, currentBalance);
         return transactionOutPort.saveTransaction(transaction);
     }
 }

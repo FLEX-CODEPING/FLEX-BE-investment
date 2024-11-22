@@ -8,6 +8,6 @@ import java.math.BigDecimal;
 
 public interface TransactionUseCase {
 
-    Transaction saveInvestmentTransaction(Long userId, Investment investment, BigDecimal totalProfit, BigDecimal balance);
-    Transaction savePointTransaction(Long userId, Point point, BigDecimal balance);
+    Transaction saveInvestmentTransaction(Long userId, Investment investment, BigDecimal currentTotalProfit, BigDecimal currentBalance);
+    Transaction savePointTransaction(Long userId, Point point, BigDecimal currentTotalProfit, BigDecimal currentBalance);
 }
