@@ -12,8 +12,8 @@ public interface TransactionPersistenceMapper {
     TransactionPersistenceMapper INSTANCE = Mappers.getMapper(TransactionPersistenceMapper.class);
 
     @Mapping(target = "investmentEntity", source = "investment")
-    TransactionEntity toTransactionEntity(Transaction transaction);
+    TransactionEntity toEntity(Transaction transaction);
 
     @Mapping(target = "investment", source = "investment")
-    Transaction toTransaction(TransactionEntity entity);
+    Transaction toDomain(TransactionEntity entity);
 }

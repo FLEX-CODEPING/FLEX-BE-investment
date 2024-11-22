@@ -12,8 +12,8 @@ public interface HoldStockPersistenceMapper {
     HoldStockPersistenceMapper INSTANCE = Mappers.getMapper(HoldStockPersistenceMapper.class);
 
     @Mapping(target = "recentInvestmentEntity", source = "recentInvestment")
-    HoldStockEntity toHoldStockEntity(HoldStock holdStock);
+    HoldStockEntity toEntity(HoldStock holdStock);
 
     @Mapping(target = "recentInvestment", source = "recentInvestment")
-    HoldStock toHoldStock(HoldStockEntity entity);
+    HoldStock toDomain(HoldStockEntity entity);
 }
