@@ -19,4 +19,8 @@ public class RecentTransaction extends BaseTime {
         this.userId = userId;
         this.transaction = transaction;
     }
+
+    public void synchronizeRecentTransaction(Transaction transaction) {
+        this.transaction = transaction;
+    }
 }
