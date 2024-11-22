@@ -54,10 +54,11 @@ public class TradingService implements TradingUseCase {
     }
 
     /**
-     * 현재 잔고와 매수 금액을 비교하여 매수 가능 여부를 검증합니다.
+     * 현재 잔고가 매수 금액 이상인지 검증합니다.
+     * 잔고가 부족하면 BALANCE_NOT_SUFFICIENT 예외를 발생시킵니다.
      *
-     * @param currentBalance 현재 잔고
-     * @param totalPrice 매수 금액
+     * @param currentBalance 현재 사용자 잔고
+     * @param totalPrice 매수 총 금액
      */
     private void validateSufficientBalance(BigDecimal currentBalance, BigDecimal totalPrice) {
         if (currentBalance.compareTo(totalPrice) < 0) {
@@ -66,10 +67,10 @@ public class TradingService implements TradingUseCase {
     }
 
     /**
-     * 매수 정보 및 거래 내역을 저장 후, 해당 매수 내역에 연관된 거래 내역을 반환합니다.
+     * 매수 투자 정보와 거래 내역을 저장합니다.
      *
-     * @param userId userId
-     * @param buyStockRequest 매수 Request DTO
+     * @param userId user PK
+     * @param buyStockRequest 매수 Request Data
      * @param currentBalance 현재 잔고
      * @param currentTotalProfit 현재 총 수익
      * @return Transaction 객체
@@ -82,11 +83,11 @@ public class TradingService implements TradingUseCase {
     }
 
     /**
-     * user 가 이미 보유한 종목이라면 매수한 수량만큼 보유 수량을 추가합니다.
-     * user 가 보유하고 있지 않은 종목이라면 보유 종목으로 저장합니다.
+     * user 가 이미 보유한 종목이라면 보유 수량을 업데이트합니다.
+     * user 가 보유하고 있지 않은 종목이라면 신규 저장합니다.
      *
-     * @param userId userId
-     * @param buyStockRequest 매수 Request DTO
+     * @param userId user PK
+     * @param buyStockRequest 매수 Request Data
      * @param investment 매수 정보
      */
     private void updateHoldStocks(Long userId, BuyStockRequest buyStockRequest, Investment investment) {

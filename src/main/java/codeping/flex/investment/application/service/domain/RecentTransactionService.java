@@ -27,23 +27,25 @@ public class RecentTransactionService implements RecentTransactionUseCase {
 
     @Override
     public RecentTransaction getRecentTransactionByUserId(Long userId) {
-        Optional<RecentTransaction> recentTransaction = recentTransactionOutPort.getRecentTransactionByUserId(userId);
-
-        if (recentTransaction.isEmpty()) {
-            throw ApplicationException.from(RECENT_TRANSACTION_NOT_FOUND);
-        }
-        return recentTransaction.get();
+        return findRecentTransactionOrThrow(userId);
     }
 
     @Override
     public RecentTransaction updateRecentTransaction(Long userId, Transaction transaction) {
-        Optional<RecentTransaction> recentTransaction = recentTransactionOutPort.getRecentTransactionByUserId(userId);
+        RecentTransaction recentTransaction = findRecentTransactionOrThrow(userId);
+        recentTransaction.synchronizeRecentTransaction(transaction);
+        return recentTransactionOutPort.saveRecentTransaction(recentTransaction);
+    }
 
-        if (recentTransaction.isEmpty()) {
-            throw ApplicationException.from(RECENT_TRANSACTION_NOT_FOUND);
-        }
-
-        recentTransaction.get().synchronizeRecentTransaction(transaction);
-        return recentTransaction.get();
+    /**
+     * userId 를 기반으로 최근 거래 내역을 조회합니다.
+     *
+     * @param userId user PK
+     * @return 조회된 RecentTransaction 객체
+     * @throws ApplicationException RECENT_TRANSACTION_NOT_FOUND 커스텀 예외 처리
+     */
+    private RecentTransaction findRecentTransactionOrThrow(Long userId) {
+        return recentTransactionOutPort.getRecentTransactionByUserId(userId)
+                .orElseThrow(() -> ApplicationException.from(RECENT_TRANSACTION_NOT_FOUND));
     }
 }

@@ -26,12 +26,6 @@ public class RecentTransactionPersistenceAdapter implements RecentTransactionOut
     @Override
     public Optional<RecentTransaction> getRecentTransactionByUserId(final Long userId) {
         final Optional<RecentTransactionEntity> recentTransactionEntity = this.recentTransactionRepository.findByUserId(userId);
-
-        if (recentTransactionEntity.isEmpty()) {
-            return Optional.empty();
-        }
-
-        final RecentTransaction recentTransaction = this.recentTransactionPersistenceMapper.toDomain(recentTransactionEntity.get());
-        return Optional.of(recentTransaction);
+        return recentTransactionEntity.map(this.recentTransactionPersistenceMapper::toDomain);
     }
 }
