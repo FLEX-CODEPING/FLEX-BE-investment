@@ -23,8 +23,8 @@ public class HoldStockService implements HoldStockUseCase {
     }
 
     @Override
-    public HoldStock saveHoldStock(Long userId, String stockCode, String corpName, long totalHoldings, Investment recentInvestment) {
-        HoldStock holdStock = mapToHoldStock(userId, stockCode, corpName, totalHoldings, recentInvestment);
+    public HoldStock saveHoldStock(Long userId, String stockCode, String corpName, long quantity, Investment investment) {
+        HoldStock holdStock = mapToHoldStock(userId, stockCode, corpName, quantity, investment);
         return holdStockOutPort.saveHoldStock(holdStock);
     }
 }

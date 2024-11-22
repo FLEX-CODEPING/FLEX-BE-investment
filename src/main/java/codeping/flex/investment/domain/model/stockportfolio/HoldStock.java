@@ -31,6 +31,7 @@ public class HoldStock extends BaseTime {
 
     public void addHoldings(long quantity) {
         this.totalHoldings += quantity;
+        this.holdStatus = HoldStatus.HOLDING;
     }
 
     public void removeHoldings(long amount) {

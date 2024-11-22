@@ -9,15 +9,13 @@ public class HoldStockMapper {
         throw new IllegalArgumentException();
     }
 
-    public static HoldStock mapToHoldStock(
-            Long userId, String stockCode, String corpName, long totalHoldings, Investment recentInvestment
-    ) {
+    public static HoldStock mapToHoldStock(Long userId, String stockCode, String corpName, long quantity, Investment investment) {
         return HoldStock.builder()
                 .userId(userId)
                 .stockCode(stockCode)
                 .corpName(corpName)
-                .totalHoldings(totalHoldings)
-                .recentInvestment(recentInvestment)
+                .totalHoldings(quantity)
+                .recentInvestment(investment)
                 .build();
     }
 }

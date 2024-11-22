@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface HoldStockUseCase {
 
     Optional<HoldStock> getHoldStockByUserIdAndStockCode(Long userId, String stockCode);
-    HoldStock saveHoldStock(Long userId, String stockCode, String corpName, long totalHoldings, Investment recentInvestment);
+    HoldStock saveHoldStock(Long userId, String stockCode, String corpName, long quantity, Investment investment);
 }
