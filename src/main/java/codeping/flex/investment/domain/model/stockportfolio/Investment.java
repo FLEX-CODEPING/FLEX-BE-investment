@@ -2,7 +2,10 @@ package codeping.flex.investment.domain.model.stockportfolio;
 
 import codeping.flex.investment.domain.constant.InvestType;
 import codeping.flex.investment.domain.model.common.BaseTime;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
@@ -21,17 +24,14 @@ public class Investment extends BaseTime {
     private BigDecimal profit; // 매매 차익
 
     @Builder
-    public Investment(
-            Long userId, String stockCode, String corpName,
-            InvestType investType, int quantity, BigDecimal price
-    ) {
+    public Investment(Long userId, String stockCode, String corpName, InvestType investType, int quantity, BigDecimal price, BigDecimal totalPrice) {
         this.userId = userId;
         this.stockCode = stockCode;
         this.corpName = corpName;
         this.investType = investType;
         this.quantity = quantity;
         this.price = price;
-        this.totalPrice = price.multiply(new BigDecimal(quantity));
+        this.totalPrice = totalPrice;
         this.profit = BigDecimal.ZERO;
     }
 

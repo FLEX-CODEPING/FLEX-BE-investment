@@ -4,13 +4,15 @@ import codeping.flex.investment.adapter.in.web.data.investment.request.BuyStockR
 import codeping.flex.investment.domain.constant.InvestType;
 import codeping.flex.investment.domain.model.stockportfolio.Investment;
 
+import java.math.BigDecimal;
+
 public class InvestmentMapper {
 
     private InvestmentMapper() {
         throw new IllegalArgumentException();
     }
 
-    public static Investment mapToInvestment(Long userId, InvestType investType, BuyStockRequest buyStockRequest) {
+    public static Investment mapToInvestment(Long userId, InvestType investType, BuyStockRequest buyStockRequest, BigDecimal totalPrice) {
         return Investment.builder()
                 .userId(userId)
                 .stockCode(buyStockRequest.stockCode())
@@ -18,6 +20,7 @@ public class InvestmentMapper {
                 .investType(investType)
                 .quantity(buyStockRequest.quantity())
                 .price(buyStockRequest.price())
+                .totalPrice(totalPrice)
                 .build();
     }
 }

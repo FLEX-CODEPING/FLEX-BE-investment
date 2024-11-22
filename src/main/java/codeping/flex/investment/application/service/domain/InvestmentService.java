@@ -8,6 +8,8 @@ import codeping.flex.investment.domain.model.stockportfolio.Investment;
 import codeping.flex.investment.global.annotation.architecture.ApplicationService;
 import lombok.RequiredArgsConstructor;
 
+import java.math.BigDecimal;
+
 import static codeping.flex.investment.application.mapper.InvestmentMapper.mapToInvestment;
 
 @ApplicationService
@@ -17,8 +19,8 @@ public class InvestmentService implements InvestmentUseCase {
     private final InvestmentOutPort investmentOutPort;
 
     @Override
-    public Investment saveBuyTypeInvestment(Long userId, BuyStockRequest buyStockRequest) {
-        Investment investment = mapToInvestment(userId, InvestType.BUY, buyStockRequest);
+    public Investment saveBuyTypeInvestment(Long userId, BuyStockRequest buyStockRequest, BigDecimal totalPrice) {
+        Investment investment = mapToInvestment(userId, InvestType.BUY, buyStockRequest, totalPrice);
         return investmentOutPort.saveInvestment(investment);
     }
 }
