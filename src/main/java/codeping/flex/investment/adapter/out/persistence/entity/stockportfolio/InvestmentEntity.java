@@ -35,13 +35,13 @@ public class InvestmentEntity extends BaseTimeEntity {
     @Column(nullable = false)
     private InvestType investType;
 
-    @Comment("매수 수량")
-    private int amount;
+    @Comment("매매 수량")
+    private int quantity;
 
-    @Comment("매수 가격")
+    @Comment("매매 가격")
     private BigDecimal price;
 
-    @Comment("매수 총 금액")
+    @Comment("매매 총 금액")
     private BigDecimal totalBuyPrice;
 
     @Comment("매도 후 발생한 차익")
@@ -49,13 +49,13 @@ public class InvestmentEntity extends BaseTimeEntity {
 
     @Builder
     public InvestmentEntity(
-            Long userId, String stockCode, String corpName, InvestType investType, int amount, BigDecimal price
+            Long userId, String stockCode, String corpName, InvestType investType, int quantity, BigDecimal price
     ) {
         this.userId = userId;
         this.stockCode = stockCode;
         this.corpName = corpName;
         this.investType = investType;
-        this.amount = amount;
+        this.quantity = quantity;
         this.price = price;
     }
 }
