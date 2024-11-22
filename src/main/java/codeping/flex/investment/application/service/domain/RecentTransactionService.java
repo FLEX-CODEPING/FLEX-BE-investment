@@ -1,9 +1,9 @@
 package codeping.flex.investment.application.service.domain;
 
-import codeping.flex.investment.application.ports.in.investment.RecentTransactionUseCase;
+import codeping.flex.investment.application.ports.in.investment.domain.RecentTransactionUseCase;
 import codeping.flex.investment.application.ports.out.RecentTransactionOutPort;
-import codeping.flex.investment.domain.model.stockportfolio.RecentTransaction;
-import codeping.flex.investment.domain.model.stockportfolio.Transaction;
+import codeping.flex.investment.domain.model.RecentTransaction;
+import codeping.flex.investment.domain.model.Transaction;
 import codeping.flex.investment.global.annotation.architecture.ApplicationService;
 import codeping.flex.investment.global.common.exception.ApplicationException;
 import lombok.RequiredArgsConstructor;

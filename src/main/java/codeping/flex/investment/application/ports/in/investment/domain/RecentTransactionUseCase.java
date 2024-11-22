@@ -1,7 +1,7 @@
-package codeping.flex.investment.application.ports.in.investment;
+package codeping.flex.investment.application.ports.in.investment.domain;
 
-import codeping.flex.investment.domain.model.stockportfolio.RecentTransaction;
-import codeping.flex.investment.domain.model.stockportfolio.Transaction;
+import codeping.flex.investment.domain.model.RecentTransaction;
+import codeping.flex.investment.domain.model.Transaction;
 
 public interface RecentTransactionUseCase {
 

@@ -1,6 +1,6 @@
 package codeping.flex.investment.application.ports.out;
 
-import codeping.flex.investment.domain.model.stockportfolio.Transaction;
+import codeping.flex.investment.domain.model.Transaction;
 
 public interface TransactionOutPort {
 

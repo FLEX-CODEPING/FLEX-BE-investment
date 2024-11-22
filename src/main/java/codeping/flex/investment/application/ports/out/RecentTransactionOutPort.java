@@ -1,6 +1,6 @@
 package codeping.flex.investment.application.ports.out;
 
-import codeping.flex.investment.domain.model.stockportfolio.RecentTransaction;
+import codeping.flex.investment.domain.model.RecentTransaction;
 
 import java.util.Optional;
 

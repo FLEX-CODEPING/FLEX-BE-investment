@@ -1,10 +1,10 @@
 package codeping.flex.investment.application.service.domain;
 
-import codeping.flex.investment.adapter.in.web.data.investment.request.BuyStockRequest;
-import codeping.flex.investment.application.ports.in.investment.InvestmentUseCase;
+import codeping.flex.investment.adapter.in.web.data.trading.request.BuyStockRequest;
+import codeping.flex.investment.application.ports.in.investment.domain.InvestmentUseCase;
 import codeping.flex.investment.application.ports.out.InvestmentOutPort;
 import codeping.flex.investment.domain.constant.InvestType;
-import codeping.flex.investment.domain.model.stockportfolio.Investment;
+import codeping.flex.investment.domain.model.Investment;
 import codeping.flex.investment.global.annotation.architecture.ApplicationService;
 import lombok.RequiredArgsConstructor;
 

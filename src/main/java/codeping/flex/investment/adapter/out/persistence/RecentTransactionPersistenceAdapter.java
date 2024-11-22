@@ -1,10 +1,10 @@
 package codeping.flex.investment.adapter.out.persistence;
 
-import codeping.flex.investment.adapter.out.persistence.entity.stockportfolio.RecentTransactionEntity;
+import codeping.flex.investment.adapter.out.persistence.entity.RecentTransactionEntity;
 import codeping.flex.investment.adapter.out.persistence.mapper.RecentTransactionPersistenceMapper;
 import codeping.flex.investment.adapter.out.persistence.repository.RecentTransactionRepository;
 import codeping.flex.investment.application.ports.out.RecentTransactionOutPort;
-import codeping.flex.investment.domain.model.stockportfolio.RecentTransaction;
+import codeping.flex.investment.domain.model.RecentTransaction;
 import codeping.flex.investment.global.annotation.architecture.PersistenceAdapter;
 import lombok.RequiredArgsConstructor;
 

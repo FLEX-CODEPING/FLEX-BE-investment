@@ -1,10 +1,10 @@
 package codeping.flex.investment.adapter.out.persistence;
 
-import codeping.flex.investment.adapter.out.persistence.entity.stockportfolio.InvestmentEntity;
+import codeping.flex.investment.adapter.out.persistence.entity.InvestmentEntity;
 import codeping.flex.investment.adapter.out.persistence.mapper.InvestmentPersistenceMapper;
 import codeping.flex.investment.adapter.out.persistence.repository.InvestmentRepository;
 import codeping.flex.investment.application.ports.out.InvestmentOutPort;
-import codeping.flex.investment.domain.model.stockportfolio.Investment;
+import codeping.flex.investment.domain.model.Investment;
 import codeping.flex.investment.global.annotation.architecture.PersistenceAdapter;
 import lombok.RequiredArgsConstructor;
 

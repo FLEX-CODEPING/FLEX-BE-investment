@@ -1,4 +1,4 @@
-package codeping.flex.investment.domain.model.stockportfolio;
+package codeping.flex.investment.domain.model;
 
 import codeping.flex.investment.domain.constant.BackTestPeriodType;
 import codeping.flex.investment.domain.constant.InvestType;

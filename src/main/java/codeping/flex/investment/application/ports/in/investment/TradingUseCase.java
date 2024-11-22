@@ -1,7 +1,7 @@
 package codeping.flex.investment.application.ports.in.investment;
 
-import codeping.flex.investment.adapter.in.web.data.investment.request.BuyStockRequest;
-import codeping.flex.investment.adapter.in.web.data.investment.response.BuyStockResponse;
+import codeping.flex.investment.adapter.in.web.data.trading.request.BuyStockRequest;
+import codeping.flex.investment.adapter.in.web.data.trading.response.BuyStockResponse;
 
 public interface TradingUseCase {
 

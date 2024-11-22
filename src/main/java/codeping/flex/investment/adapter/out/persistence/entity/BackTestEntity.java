@@ -1,4 +1,4 @@
-package codeping.flex.investment.adapter.out.persistence.entity.stockportfolio;
+package codeping.flex.investment.adapter.out.persistence.entity;
 
 import codeping.flex.investment.adapter.out.persistence.converter.BackTestPeriodConverter;
 import codeping.flex.investment.adapter.out.persistence.entity.common.BaseTimeEntity;

@@ -1,10 +1,10 @@
 package codeping.flex.investment.application.service.domain;
 
-import codeping.flex.investment.application.ports.in.investment.HoldStockUseCase;
+import codeping.flex.investment.application.ports.in.investment.domain.HoldStockUseCase;
 import codeping.flex.investment.application.ports.out.HoldStockOutPort;
 import codeping.flex.investment.domain.constant.HoldStatus;
-import codeping.flex.investment.domain.model.stockportfolio.HoldStock;
-import codeping.flex.investment.domain.model.stockportfolio.Investment;
+import codeping.flex.investment.domain.model.HoldStock;
+import codeping.flex.investment.domain.model.Investment;
 import codeping.flex.investment.global.annotation.architecture.ApplicationService;
 import lombok.RequiredArgsConstructor;
 

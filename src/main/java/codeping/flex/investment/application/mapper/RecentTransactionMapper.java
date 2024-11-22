@@ -1,7 +1,7 @@
 package codeping.flex.investment.application.mapper;
 
-import codeping.flex.investment.domain.model.stockportfolio.RecentTransaction;
-import codeping.flex.investment.domain.model.stockportfolio.Transaction;
+import codeping.flex.investment.domain.model.RecentTransaction;
+import codeping.flex.investment.domain.model.Transaction;
 
 public class RecentTransactionMapper {
 

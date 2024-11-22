@@ -1,7 +1,6 @@
-package codeping.flex.investment.domain.model.stockportfolio;
+package codeping.flex.investment.domain.model;
 
 import codeping.flex.investment.domain.model.common.BaseTime;
-import codeping.flex.investment.domain.model.point.Point;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package codeping.flex.investment.adapter.in.web.data.investment.response;
+package codeping.flex.investment.adapter.in.web.data.trading.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 

@@ -1,10 +1,10 @@
 package codeping.flex.investment.application.service.domain;
 
-import codeping.flex.investment.application.ports.in.investment.TransactionUseCase;
+import codeping.flex.investment.application.ports.in.investment.domain.TransactionUseCase;
 import codeping.flex.investment.application.ports.out.TransactionOutPort;
-import codeping.flex.investment.domain.model.point.Point;
-import codeping.flex.investment.domain.model.stockportfolio.Investment;
-import codeping.flex.investment.domain.model.stockportfolio.Transaction;
+import codeping.flex.investment.domain.model.Point;
+import codeping.flex.investment.domain.model.Investment;
+import codeping.flex.investment.domain.model.Transaction;
 import codeping.flex.investment.global.annotation.architecture.ApplicationService;
 import lombok.RequiredArgsConstructor;
 

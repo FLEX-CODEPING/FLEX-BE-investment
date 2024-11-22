@@ -1,4 +1,4 @@
-package codeping.flex.investment.adapter.in.web.data.investment.request;
+package codeping.flex.investment.adapter.in.web.data.trading.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;

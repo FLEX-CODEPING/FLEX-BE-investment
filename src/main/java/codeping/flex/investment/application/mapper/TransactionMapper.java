@@ -1,8 +1,8 @@
 package codeping.flex.investment.application.mapper;
 
-import codeping.flex.investment.domain.model.point.Point;
-import codeping.flex.investment.domain.model.stockportfolio.Investment;
-import codeping.flex.investment.domain.model.stockportfolio.Transaction;
+import codeping.flex.investment.domain.model.Point;
+import codeping.flex.investment.domain.model.Investment;
+import codeping.flex.investment.domain.model.Transaction;
 
 import java.math.BigDecimal;
 

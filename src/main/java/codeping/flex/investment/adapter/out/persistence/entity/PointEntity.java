@@ -1,4 +1,4 @@
-package codeping.flex.investment.adapter.out.persistence.entity.point;
+package codeping.flex.investment.adapter.out.persistence.entity;
 
 import codeping.flex.investment.adapter.out.persistence.converter.PointTypeConverter;
 import codeping.flex.investment.adapter.out.persistence.entity.common.BaseTimeEntity;

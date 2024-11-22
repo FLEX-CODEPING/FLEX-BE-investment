@@ -1,12 +1,16 @@
-package codeping.flex.investment.application.service.aggregate;
+package codeping.flex.investment.application.service;
 
-import codeping.flex.investment.adapter.in.web.data.investment.request.BuyStockRequest;
-import codeping.flex.investment.adapter.in.web.data.investment.response.BuyStockResponse;
-import codeping.flex.investment.application.ports.in.investment.*;
-import codeping.flex.investment.domain.model.stockportfolio.HoldStock;
-import codeping.flex.investment.domain.model.stockportfolio.Investment;
-import codeping.flex.investment.domain.model.stockportfolio.RecentTransaction;
-import codeping.flex.investment.domain.model.stockportfolio.Transaction;
+import codeping.flex.investment.adapter.in.web.data.trading.request.BuyStockRequest;
+import codeping.flex.investment.adapter.in.web.data.trading.response.BuyStockResponse;
+import codeping.flex.investment.application.ports.in.investment.TradingUseCase;
+import codeping.flex.investment.application.ports.in.investment.domain.HoldStockUseCase;
+import codeping.flex.investment.application.ports.in.investment.domain.InvestmentUseCase;
+import codeping.flex.investment.application.ports.in.investment.domain.RecentTransactionUseCase;
+import codeping.flex.investment.application.ports.in.investment.domain.TransactionUseCase;
+import codeping.flex.investment.domain.model.HoldStock;
+import codeping.flex.investment.domain.model.Investment;
+import codeping.flex.investment.domain.model.RecentTransaction;
+import codeping.flex.investment.domain.model.Transaction;
 import codeping.flex.investment.global.annotation.architecture.ApplicationService;
 import codeping.flex.investment.global.common.exception.ApplicationException;
 import lombok.RequiredArgsConstructor;

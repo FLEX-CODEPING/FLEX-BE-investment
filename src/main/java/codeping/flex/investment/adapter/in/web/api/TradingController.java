@@ -1,7 +1,7 @@
 package codeping.flex.investment.adapter.in.web.api;
 
-import codeping.flex.investment.adapter.in.web.data.investment.request.BuyStockRequest;
-import codeping.flex.investment.adapter.in.web.data.investment.response.BuyStockResponse;
+import codeping.flex.investment.adapter.in.web.data.trading.request.BuyStockRequest;
+import codeping.flex.investment.adapter.in.web.data.trading.response.BuyStockResponse;
 import codeping.flex.investment.application.ports.in.investment.TradingUseCase;
 import codeping.flex.investment.global.annotation.architecture.WebAdapter;
 import codeping.flex.investment.global.annotation.passport.Passport;

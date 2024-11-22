@@ -1,4 +1,4 @@
-package codeping.flex.investment.domain.model.point;
+package codeping.flex.investment.domain.model;
 
 import codeping.flex.investment.domain.constant.PointType;
 import lombok.AccessLevel;

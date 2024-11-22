@@ -1,4 +1,4 @@
-package codeping.flex.investment.adapter.out.persistence.entity.stockportfolio;
+package codeping.flex.investment.adapter.out.persistence.entity;
 
 import codeping.flex.investment.adapter.out.persistence.entity.common.BaseTimeEntity;
 import codeping.flex.investment.domain.constant.HoldStatus;
