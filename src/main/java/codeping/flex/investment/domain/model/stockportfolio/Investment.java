@@ -24,7 +24,7 @@ public class Investment extends BaseTime {
     private BigDecimal profit; // 매매 차익
 
     @Builder
-    public Investment(Long userId, String stockCode, String corpName, InvestType investType, int quantity, BigDecimal price, BigDecimal totalPrice) {
+    public Investment(Long userId, String stockCode, String corpName, InvestType investType, int quantity, BigDecimal price, BigDecimal totalPrice, BigDecimal profit) {
         this.userId = userId;
         this.stockCode = stockCode;
         this.corpName = corpName;
@@ -32,9 +32,8 @@ public class Investment extends BaseTime {
         this.quantity = quantity;
         this.price = price;
         this.totalPrice = totalPrice;
-        this.profit = BigDecimal.ZERO;
+        this.profit = profit;
     }
-
 
     /**
      * 해당 주식에 대한 최근 거래 내역을 참조하여,

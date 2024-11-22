@@ -2,6 +2,7 @@ package codeping.flex.investment.application.service.domain;
 
 import codeping.flex.investment.application.ports.in.investment.HoldStockUseCase;
 import codeping.flex.investment.application.ports.out.HoldStockOutPort;
+import codeping.flex.investment.domain.constant.HoldStatus;
 import codeping.flex.investment.domain.model.stockportfolio.HoldStock;
 import codeping.flex.investment.domain.model.stockportfolio.Investment;
 import codeping.flex.investment.global.annotation.architecture.ApplicationService;
@@ -24,7 +25,7 @@ public class HoldStockService implements HoldStockUseCase {
 
     @Override
     public HoldStock saveHoldStock(Long userId, String stockCode, String corpName, long quantity, Investment investment) {
-        HoldStock holdStock = mapToHoldStock(userId, stockCode, corpName, quantity, investment);
+        HoldStock holdStock = mapToHoldStock(userId, stockCode, corpName, quantity, HoldStatus.HOLDING, investment);
         return holdStockOutPort.saveHoldStock(holdStock);
     }
 }

@@ -32,7 +32,7 @@ public class TransactionMapper {
     public static Transaction mapToPointTransaction(Long userId, Point point, BigDecimal currentTotalProfit, BigDecimal currentBalance) {
         return Transaction.builder()
                 .userId(userId)
-                .pointId(point.getPointId())
+                .point(point)
                 .totalProfit(currentTotalProfit)
                 .balance(currentBalance.add(BigDecimal.valueOf(point.getPointAmount())))
                 .build();

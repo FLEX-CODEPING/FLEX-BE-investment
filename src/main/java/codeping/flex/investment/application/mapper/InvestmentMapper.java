@@ -21,6 +21,7 @@ public class InvestmentMapper {
                 .quantity(buyStockRequest.quantity())
                 .price(buyStockRequest.price())
                 .totalPrice(totalPrice)
+                .profit(BigDecimal.ZERO)
                 .build();
     }
 }

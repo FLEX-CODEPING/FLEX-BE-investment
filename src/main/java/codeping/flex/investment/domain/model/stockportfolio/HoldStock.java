@@ -20,12 +20,12 @@ public class HoldStock extends BaseTime {
     private Investment recentInvestment; // 최근 매도/매수 내역
 
     @Builder
-    public HoldStock(Long userId, String corpName, String stockCode, long totalHoldings, Investment recentInvestment) {
+    public HoldStock(Long userId, String corpName, String stockCode, long totalHoldings, HoldStatus holdStatus, Investment recentInvestment) {
         this.userId = userId;
         this.corpName = corpName;
         this.stockCode = stockCode;
         this.totalHoldings = totalHoldings;
-        this.holdStatus = HoldStatus.HOLDING;
+        this.holdStatus = holdStatus;
         this.recentInvestment = recentInvestment;
     }
 
