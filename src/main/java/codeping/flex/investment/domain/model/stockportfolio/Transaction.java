@@ -24,7 +24,7 @@ public class Transaction extends BaseTime {
         this.userId = userId;
         this.investment = investment;
         this.pointId = pointId;
-        this.totalProfit = totalProfit;
+        this.totalProfit = BigDecimal.ZERO.add(totalProfit);
         this.balance = balance;
     }
 }
