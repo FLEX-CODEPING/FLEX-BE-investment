@@ -13,19 +13,19 @@ import java.util.Optional;
 @PersistenceAdapter
 @RequiredArgsConstructor
 public class HoldStockPersistenceAdapter implements HoldStockOutPort {
+
     private final HoldStockRepository holdStockRepository;
     private final HoldStockPersistenceMapper holdStockPersistenceMapper;
 
     @Override
     public HoldStock saveHoldStock(HoldStock holdStock) {
-        HoldStockEntity holdStockEntity = this.holdStockPersistenceMapper.toEntity(holdStock);
+        HoldStockEntity holdStockEntity = this.holdStockPersistenceMapper.toHoldStockEntity(holdStock);
         HoldStockEntity savedEntity = this.holdStockRepository.save(holdStockEntity);
-        return this.holdStockPersistenceMapper.toDomain(savedEntity);
+        return this.holdStockPersistenceMapper.toHoldStock(savedEntity);
     }
 
-    @Override
-    public Optional<HoldStock> getHoldStockById(Long holdStockId) {
-        return Optional.empty();
+    public Optional<HoldStock> getHoldStockByUserIdAndStockCode(Long userId, String stockCode) {
+        Optional<HoldStockEntity> holdStockEntity = holdStockRepository.findByUserIdAndStockCode(userId, stockCode);
+        return holdStockEntity.map(this.holdStockPersistenceMapper::toHoldStock);
     }
-
 }

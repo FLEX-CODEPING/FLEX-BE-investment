@@ -7,5 +7,5 @@ import java.util.Optional;
 public interface HoldStockOutPort {
 
     HoldStock saveHoldStock(HoldStock holdStock);
-    Optional<HoldStock> getHoldStockById(Long holdStockId);
+    Optional<HoldStock> getHoldStockByUserIdAndStockCode(Long userId, String stockCode);
 }
