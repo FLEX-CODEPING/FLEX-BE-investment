@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public enum InvestmentErrorCode implements BaseErrorCode {
 
+    BALANCE_NOT_SUFFICIENT(HttpStatus.BAD_REQUEST, "INVESTMENT_001", "잔고가 부족합니다."),
     ;
 
     private final HttpStatus httpStatus;

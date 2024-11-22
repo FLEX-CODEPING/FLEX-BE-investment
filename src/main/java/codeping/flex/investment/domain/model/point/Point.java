@@ -1,8 +1,13 @@
 package codeping.flex.investment.domain.model.point;
 
 import codeping.flex.investment.domain.constant.PointType;
+import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Point {
 
     private Long pointId;
