@@ -18,9 +18,9 @@ public class RecentTransactionPersistenceAdapter implements RecentTransactionOut
     private final RecentTransactionPersistenceMapper recentTransactionPersistenceMapper;
 
     public RecentTransaction saveRecentTransaction(final RecentTransaction recentTransaction) {
-        RecentTransactionEntity recentTransactionEntity = this.recentTransactionPersistenceMapper.toRecentTransactionEntity(recentTransaction);
+        RecentTransactionEntity recentTransactionEntity = this.recentTransactionPersistenceMapper.toEntity(recentTransaction);
         RecentTransactionEntity savedEntity = this.recentTransactionRepository.save(recentTransactionEntity);
-        return this.recentTransactionPersistenceMapper.toRecentTransaction(savedEntity);
+        return this.recentTransactionPersistenceMapper.toDomain(savedEntity);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class RecentTransactionPersistenceAdapter implements RecentTransactionOut
             return Optional.empty();
         }
 
-        final RecentTransaction recentTransaction = this.recentTransactionPersistenceMapper.toRecentTransaction(recentTransactionEntity.get());
+        final RecentTransaction recentTransaction = this.recentTransactionPersistenceMapper.toDomain(recentTransactionEntity.get());
         return Optional.of(recentTransaction);
     }
 }

@@ -42,7 +42,7 @@ public class InvestmentEntity extends BaseTimeEntity {
     private BigDecimal price;
 
     @Comment("매매 총 금액")
-    private BigDecimal totalBuyPrice;
+    private BigDecimal totalPrice;
 
     @Comment("매도 후 발생한 차익")
     private BigDecimal profit;

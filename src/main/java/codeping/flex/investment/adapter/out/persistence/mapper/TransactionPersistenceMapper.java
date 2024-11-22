@@ -6,14 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring", uses = InvestmentPersistenceMapper.class)
-public interface TransactionPersistenceMapper {
+@Mapper(componentModel = "spring")
+public interface TransactionPersistenceMapper extends PersistenceMapper<TransactionEntity, Transaction> {
 
-    TransactionPersistenceMapper INSTANCE = Mappers.getMapper(TransactionPersistenceMapper.class);
-
-    @Mapping(target = "investmentEntity", source = "investment")
-    TransactionEntity toEntity(Transaction transaction);
-
-    @Mapping(target = "investment", source = "investment")
-    Transaction toDomain(TransactionEntity entity);
 }

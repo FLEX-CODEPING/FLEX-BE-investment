@@ -5,11 +5,7 @@ import codeping.flex.investment.domain.model.stockportfolio.RecentTransaction;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring", uses = InvestmentPersistenceMapper.class)
-public interface RecentTransactionPersistenceMapper {
+@Mapper(componentModel = "spring")
+public interface RecentTransactionPersistenceMapper extends PersistenceMapper<RecentTransactionEntity, RecentTransaction> {
 
-    RecentTransactionPersistenceMapper INSTANCE = Mappers.getMapper(RecentTransactionPersistenceMapper.class);
-
-    RecentTransactionEntity toRecentTransactionEntity(RecentTransaction recentTransaction);
-    RecentTransaction toRecentTransaction(RecentTransactionEntity entity);
 }

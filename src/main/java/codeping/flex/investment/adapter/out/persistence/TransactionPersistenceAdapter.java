@@ -17,8 +17,8 @@ public class TransactionPersistenceAdapter implements TransactionOutPort {
 
     @Override
     public Transaction saveTransaction(Transaction transaction) {
-        TransactionEntity transactionEntity = this.transactionPersistenceMapper.toTransactionEntity(transaction);
+        TransactionEntity transactionEntity = this.transactionPersistenceMapper.toEntity(transaction);
         TransactionEntity savedEntity = this.transactionRepository.save(transactionEntity);
-        return this.transactionPersistenceMapper.toTransaction(savedEntity);
+        return this.transactionPersistenceMapper.toDomain(savedEntity);
     }
 }
