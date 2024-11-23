@@ -28,4 +28,21 @@ public class HoldStockService implements HoldStockUseCase {
         HoldStock holdStock = mapToHoldStock(userId, stockCode, corpName, quantity, HoldStatus.HOLDING, investment);
         return holdStockOutPort.saveHoldStock(holdStock);
     }
+
+    /**
+     * user 가 이미 보유한 종목이라면 보유 수량, 상태, 평단가를 업데이트합니다.
+     * user 가 보유하고 있지 않은 종목이라면 신규 저장합니다.
+     *
+     * @param userId user PK
+     * @param investment 매수 정보
+     */
+    @Override
+    public void updateBuyOrCreateHoldStock(Long userId, Investment investment) {
+        Optional<HoldStock> holdStock = getHoldStockByUserIdAndStockCode(userId, investment.getStockCode());
+
+        holdStock.ifPresentOrElse(
+                stock -> stock.buy(investment.getQuantity(), investment.getTotalPrice()),
+                () -> saveHoldStock(userId, investment.getStockCode(), investment.getCorpName(), investment.getQuantity(), investment)
+        );
+    }
 }

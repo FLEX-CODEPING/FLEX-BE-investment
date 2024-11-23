@@ -7,7 +7,6 @@ import codeping.flex.investment.application.ports.in.investment.domain.HoldStock
 import codeping.flex.investment.application.ports.in.investment.domain.InvestmentUseCase;
 import codeping.flex.investment.application.ports.in.investment.domain.RecentTransactionUseCase;
 import codeping.flex.investment.application.ports.in.investment.domain.TransactionUseCase;
-import codeping.flex.investment.domain.model.HoldStock;
 import codeping.flex.investment.domain.model.Investment;
 import codeping.flex.investment.domain.model.RecentTransaction;
 import codeping.flex.investment.domain.model.Transaction;
@@ -16,7 +15,6 @@ import codeping.flex.investment.global.common.exception.ApplicationException;
 import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.Optional;
 
 import static codeping.flex.investment.application.mapper.TradingResponseMapper.mapToBuyStockResponse;
 import static codeping.flex.investment.domain.exception.InvestmentErrorCode.BALANCE_NOT_SUFFICIENT;
@@ -45,7 +43,7 @@ public class TradingService implements TradingUseCase {
         Transaction transaction = saveInvestmentAndTransaction(userId, buyStockRequest, currentBalance, currentTotalProfit, totalPrice);
 
         // 보유 주식 업데이트
-        updateHoldStocks(userId, buyStockRequest, transaction.getInvestment());
+        holdStockUseCase.updateBuyOrCreateHoldStock(userId, transaction.getInvestment());
 
         // 최신 거래내역 업데이트
         recentTransactionUseCase.updateRecentTransaction(userId, transaction);
@@ -80,28 +78,5 @@ public class TradingService implements TradingUseCase {
     ) {
         Investment investment = investmentUseCase.saveBuyTypeInvestment(userId, buyStockRequest, totalPrice);
         return transactionUseCase.saveInvestmentTransaction(userId, investment, currentTotalProfit, currentBalance);
-    }
-
-    /**
-     * user 가 이미 보유한 종목이라면 보유 수량을 업데이트합니다.
-     * user 가 보유하고 있지 않은 종목이라면 신규 저장합니다.
-     *
-     * @param userId user PK
-     * @param buyStockRequest 매수 Request Data
-     * @param investment 매수 정보
-     */
-    private void updateHoldStocks(Long userId, BuyStockRequest buyStockRequest, Investment investment) {
-        Optional<HoldStock> holdStock = holdStockUseCase.getHoldStockByUserIdAndStockCode(userId, investment.getStockCode());
-
-        holdStock.ifPresentOrElse(
-                stock -> stock.addHoldings(buyStockRequest.quantity()),
-                () -> holdStockUseCase.saveHoldStock(
-                        userId,
-                        buyStockRequest.stockCode(),
-                        buyStockRequest.corpName(),
-                        buyStockRequest.quantity(),
-                        investment
-                )
-        );
     }
 }

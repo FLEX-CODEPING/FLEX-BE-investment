@@ -9,4 +9,5 @@ public interface HoldStockUseCase {
 
     Optional<HoldStock> getHoldStockByUserIdAndStockCode(Long userId, String stockCode);
     HoldStock saveHoldStock(Long userId, String stockCode, String corpName, long quantity, Investment investment);
+    void updateBuyOrCreateHoldStock(Long userId, Investment investment);
 }
