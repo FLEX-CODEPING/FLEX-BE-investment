@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class HoldStock extends BaseTime {
@@ -17,15 +19,22 @@ public class HoldStock extends BaseTime {
     private String stockCode;
     private long totalHoldings; // 총 보유량
     private HoldStatus holdStatus; // 보유 상태
+    private BigDecimal avgPrice; // 평단가
+    private BigDecimal principal; // 원금
     private Investment recentInvestment; // 최근 매도/매수 내역
 
     @Builder
-    public HoldStock(Long userId, String corpName, String stockCode, long totalHoldings, HoldStatus holdStatus, Investment recentInvestment) {
+    public HoldStock(
+            Long userId, String corpName, String stockCode,
+            long totalHoldings, HoldStatus holdStatus, BigDecimal avgPrice, BigDecimal principal, Investment recentInvestment
+    ) {
         this.userId = userId;
         this.corpName = corpName;
         this.stockCode = stockCode;
         this.totalHoldings = totalHoldings;
         this.holdStatus = holdStatus;
+        this.avgPrice = avgPrice;
+        this.principal = principal;
         this.recentInvestment = recentInvestment;
     }
 

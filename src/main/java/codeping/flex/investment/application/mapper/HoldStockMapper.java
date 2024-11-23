@@ -17,6 +17,8 @@ public class HoldStockMapper {
                 .corpName(corpName)
                 .totalHoldings(quantity)
                 .holdStatus(holdStatus)
+                .avgPrice(investment.getPrice())
+                .principal(investment.getTotalPrice())
                 .recentInvestment(investment)
                 .build();
     }

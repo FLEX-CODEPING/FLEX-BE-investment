@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
+import java.math.BigDecimal;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -37,6 +39,14 @@ public class HoldStockEntity extends BaseTimeEntity {
     @Column(nullable = false)
     private HoldStatus holdStatus;
 
+    @Comment("평단가")
+    @Column(nullable = false)
+    private BigDecimal avgPrice;
+
+    @Comment("원금")
+    @Column(nullable = false)
+    private BigDecimal principal;
+
     @OneToOne
     @JoinColumn(name = "recent_investment_id", nullable = false)
     private InvestmentEntity recentInvestment;
@@ -44,13 +54,15 @@ public class HoldStockEntity extends BaseTimeEntity {
     @Builder
     public HoldStockEntity(
             Long userId, String stockCode, String corpName,
-            long totalHoldings, HoldStatus holdStatus, InvestmentEntity recentInvestment
+            long totalHoldings, HoldStatus holdStatus, InvestmentEntity recentInvestment, BigDecimal avgPrice, BigDecimal principal
     ) {
         this.userId = userId;
         this.stockCode = stockCode;
         this.corpName = corpName;
         this.totalHoldings = totalHoldings;
         this.holdStatus = holdStatus;
+        this.avgPrice = avgPrice;
+        this.principal = principal;
         this.recentInvestment = recentInvestment;
     }
 }
