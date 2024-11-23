@@ -38,16 +38,25 @@ public class HoldStock extends BaseTime {
         this.recentInvestment = recentInvestment;
     }
 
-    public void addHoldings(long quantity) {
-        this.totalHoldings += quantity;
-        this.holdStatus = HoldStatus.HOLDING;
-    }
+    /**
+     * 매수 시, 해당 보유 종목 정보를 업데이트합니다.
+     *
+     * @param quantity 매수 수량
+     * @param totalPrice 매수 총 가격
+     */
+    public void buy(long quantity, BigDecimal totalPrice) {
+        // 기존 투자금 + 신규 투자금으로 평단가 재계산
+        BigDecimal currentTotalInvestment = this.avgPrice.multiply(BigDecimal.valueOf(this.totalHoldings));
+        BigDecimal newTotalInvestment = currentTotalInvestment.add(totalPrice);
 
-    public void removeHoldings(long amount) {
-        this.totalHoldings -= amount;
-        if (this.totalHoldings == 0) {
-            this.holdStatus = HoldStatus.SOLD;
-        }
+        // 보유 수량 업데이트
+        this.totalHoldings += quantity;
+        // 평단가 업데이트
+        this.avgPrice = newTotalInvestment.divide(BigDecimal.valueOf(this.totalHoldings), BigDecimal.ROUND_HALF_UP);
+        // 기존 원금에 매수 금액 추가
+        this.principal = this.principal.add(totalPrice);
+        // 상태 업데이트
+        this.holdStatus = HoldStatus.HOLDING;
     }
 
     public boolean hasEnoughHoldings(long amount) {
