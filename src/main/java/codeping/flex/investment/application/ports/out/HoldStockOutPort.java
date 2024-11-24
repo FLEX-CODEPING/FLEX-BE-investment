@@ -11,4 +11,5 @@ public interface HoldStockOutPort {
 
     /** GET **/
     Optional<HoldStock> getHoldStockByUserIdAndStockCode(Long userId, String stockCode);
+    Optional<HoldStock> getHoldStockById(Long holdStockId);
 }

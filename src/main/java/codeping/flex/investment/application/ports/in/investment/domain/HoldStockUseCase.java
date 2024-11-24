@@ -14,6 +14,7 @@ public interface HoldStockUseCase {
     /** GET **/
     // 보유 종목 조회
     Optional<HoldStock> getHoldStockByUserIdAndStockCode(Long userId, String stockCode);
+    HoldStock getHoldStockById(Long holdStockId);
 
     /** UPDATE **/
     // 매수 시 보유 종목 업데이트
