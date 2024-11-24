@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -21,7 +22,7 @@ public class HoldStock extends BaseTime {
     private HoldStatus holdStatus; // 보유 상태
     private BigDecimal avgPrice; // 평단가
     private BigDecimal principal; // 원금
-    private Investment recentInvestment; // 최근 매도/매수 내역
+    private Investment recentInvestment; // 최근 투자 거래 내역
 
     @Builder
     public HoldStock(
@@ -44,7 +45,7 @@ public class HoldStock extends BaseTime {
      * @param quantity 매수 수량
      * @param totalPrice 매수 총 가격
      */
-    public void buy(long quantity, BigDecimal totalPrice) {
+    public void buy(long quantity, BigDecimal totalPrice, Investment investment) {
         // 기존 투자금 + 신규 투자금으로 평단가 재계산
         BigDecimal currentTotalInvestment = this.avgPrice.multiply(BigDecimal.valueOf(this.totalHoldings));
         BigDecimal newTotalInvestment = currentTotalInvestment.add(totalPrice);
@@ -52,21 +53,16 @@ public class HoldStock extends BaseTime {
         // 보유 수량 업데이트
         this.totalHoldings += quantity;
         // 평단가 업데이트
-        this.avgPrice = newTotalInvestment.divide(BigDecimal.valueOf(this.totalHoldings), BigDecimal.ROUND_HALF_UP);
-        // 기존 원금에 매수 금액 추가
+        this.avgPrice = newTotalInvestment.divide(BigDecimal.valueOf(this.totalHoldings), MathContext.DECIMAL64);
+        // 원금 업데이트
         this.principal = this.principal.add(totalPrice);
         // 상태 업데이트
         this.holdStatus = HoldStatus.HOLDING;
+        // 최근 거래 업데이트
+        this.recentInvestment = investment;
     }
 
     public boolean hasEnoughHoldings(long amount) {
         return this.totalHoldings >= amount;
-    }
-
-    /**
-     * 해당 종목에 대한 최신 투자 데이터를 업데이트합니다.
-     */
-    public void setLatestInvestment(Investment recentInvestment) {
-        this.recentInvestment = recentInvestment;
     }
 }
