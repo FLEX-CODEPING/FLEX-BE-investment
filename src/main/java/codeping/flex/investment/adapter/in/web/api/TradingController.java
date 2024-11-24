@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static codeping.flex.investment.domain.exception.HoldStockErrorCode.HOLD_STOCK_NOT_EXIST;
+import static codeping.flex.investment.domain.exception.HoldStockErrorCode.HOLD_STOCK_NOT_SUFFICIENT;
 import static codeping.flex.investment.domain.exception.InvestmentErrorCode.BALANCE_NOT_SUFFICIENT;
 import static codeping.flex.investment.domain.exception.RecentTransactionErrorCode.RECENT_TRANSACTION_NOT_FOUND;
 
@@ -46,9 +48,13 @@ public class TradingController {
 
     @PostMapping("/sell")
     @Operation(summary = "매도", description = "특정 종목에 대한 주식을 매도합니다.")
+    @ApiErrorCodes(
+            recentTransactionErrors = {RECENT_TRANSACTION_NOT_FOUND},
+            holdStockErrors = {HOLD_STOCK_NOT_EXIST, HOLD_STOCK_NOT_SUFFICIENT}
+    )
     public ApplicationResponse<SellStockResponse> sellStocks(
             @Parameter(hidden = true) @Passport PassportInfo passportInfo,
-            SellStockRequest sellStockRequest
+            @RequestBody @Valid SellStockRequest sellStockRequest
     ) {
         SellStockResponse sellStockResponse = tradingUseCase.sellStocks(passportInfo.userId(), sellStockRequest);
         return ApplicationResponse.onSuccess(sellStockResponse);
