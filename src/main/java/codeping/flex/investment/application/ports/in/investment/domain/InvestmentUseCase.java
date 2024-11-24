@@ -7,5 +7,7 @@ import java.math.BigDecimal;
 
 public interface InvestmentUseCase {
 
+    /** SAVE **/
+    // 매수 정보 저장
     Investment saveBuyTypeInvestment(Long userId, BuyStockRequest buyStockRequest, BigDecimal totalPrice);
 }

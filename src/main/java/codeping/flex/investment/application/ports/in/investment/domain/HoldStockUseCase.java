@@ -7,7 +7,15 @@ import java.util.Optional;
 
 public interface HoldStockUseCase {
 
-    Optional<HoldStock> getHoldStockByUserIdAndStockCode(Long userId, String stockCode);
+    /** SAVE **/
+    // 보유 종목 저장
     HoldStock saveHoldStock(Long userId, String stockCode, String corpName, long quantity, Investment investment);
+
+    /** GET **/
+    // 보유 종목 조회
+    Optional<HoldStock> getHoldStockByUserIdAndStockCode(Long userId, String stockCode);
+
+    /** UPDATE **/
+    // 매수 시 보유 종목 업데이트
     void updateBuyOrCreateHoldStock(Long userId, Investment investment);
 }

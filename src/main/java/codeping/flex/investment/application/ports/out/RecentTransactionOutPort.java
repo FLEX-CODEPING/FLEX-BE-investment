@@ -6,6 +6,9 @@ import java.util.Optional;
 
 public interface RecentTransactionOutPort {
 
+    /** SAVE **/
     RecentTransaction saveRecentTransaction(RecentTransaction recentTransaction) ;
+
+    /** GET **/
     Optional<RecentTransaction> getRecentTransactionByUserId(final Long userId);
 }

@@ -8,6 +8,9 @@ import java.math.BigDecimal;
 
 public interface TransactionUseCase {
 
+    /** SAVE **/
+    // 투자 내역 저장
     Transaction saveInvestmentTransaction(Long userId, Investment investment, BigDecimal currentTotalProfit, BigDecimal currentBalance);
+    // 크레딧 내역 저장
     Transaction savePointTransaction(Long userId, Point point, BigDecimal currentTotalProfit, BigDecimal currentBalance);
 }

@@ -23,8 +23,8 @@ public class TradingController {
     private final TradingUseCase tradingUseCase;
 
     @PostMapping("/buy")
-    @Operation(summary = "매수", description = "특정 종목에 대한 주식을 매수한다.")
-    public ApplicationResponse<BuyStockResponse> reissue(
+    @Operation(summary = "매수", description = "특정 종목에 대한 주식을 매수합니다.")
+    public ApplicationResponse<BuyStockResponse> buyStocks(
             @Parameter(hidden = true) @Passport PassportInfo passportInfo,
             BuyStockRequest buyStockRequest
     ) {

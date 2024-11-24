@@ -5,5 +5,7 @@ import codeping.flex.investment.adapter.in.web.data.trading.response.BuyStockRes
 
 public interface TradingUseCase {
 
+    /** 주식 매매 **/
+    // 주식 매수
     BuyStockResponse buyStocks(Long userId, BuyStockRequest buyStockRequest);
 }

@@ -41,7 +41,7 @@ public class HoldStockService implements HoldStockUseCase {
         Optional<HoldStock> holdStock = getHoldStockByUserIdAndStockCode(userId, investment.getStockCode());
 
         holdStock.ifPresentOrElse(
-                stock -> stock.buy(investment.getQuantity(), investment.getTotalPrice()),
+                stock -> stock.buy(investment.getQuantity(), investment.getTotalPrice(), investment),
                 () -> saveHoldStock(userId, investment.getStockCode(), investment.getCorpName(), investment.getQuantity(), investment)
         );
     }
