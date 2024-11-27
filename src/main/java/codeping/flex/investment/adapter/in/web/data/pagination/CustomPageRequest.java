@@ -1,9 +1,12 @@
 package codeping.flex.investment.adapter.in.web.data.pagination;
 
+import codeping.flex.investment.global.common.exception.ApplicationException;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+
+import static codeping.flex.investment.global.common.response.code.CommonErrorCode.INVALID_PARAMETER;
 
 @Getter
 public class CustomPageRequest {
@@ -20,18 +23,23 @@ public class CustomPageRequest {
     @Schema(description = "정렬 방향 (desc | asc)", nullable = true, example = "desc", defaultValue = "desc")
     private String direction = "desc";
 
-    public CustomPageRequest(boolean paging, int page, int size, String property, String direction) {
+    public CustomPageRequest(int page, int size, String property, String direction) {
         this.page = Math.max(0, page - 1);
         this.size = Math.max(1, size);
         this.property = property;
-        this.direction = validateDirection(direction); // 정렬 방향 검증
+        this.direction = validateDirection(direction);
     }
 
-    private String validateDirection(String dirs) {
-        if ((!dirs.equalsIgnoreCase("asc") && !dirs.equalsIgnoreCase("desc"))) {
-            return "desc";
+    /**
+     * 정렬 방향을 검증합니다.
+     * @param dir 정렬 방향
+     * @return desc | asc
+     */
+    private String validateDirection(String dir) {
+        if ((!dir.equalsIgnoreCase("asc") && !dir.equalsIgnoreCase("desc"))) {
+            throw ApplicationException.from(INVALID_PARAMETER);
         }
-        return dirs.toUpperCase();
+        return dir.toLowerCase();
     }
 
     /**
