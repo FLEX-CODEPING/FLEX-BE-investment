@@ -1,10 +1,11 @@
 package codeping.flex.investment.application.ports.in.investment;
 
-import codeping.flex.investment.adapter.in.web.data.investment.request.BuyStockRequest;
-import codeping.flex.investment.adapter.in.web.data.investment.request.SellStockRequest;
+import codeping.flex.investment.adapter.in.web.data.trading.request.BuyStockRequest;
+import codeping.flex.investment.adapter.in.web.data.trading.response.BuyStockResponse;
 
 public interface TradingUseCase {
 
-    Long buyStocks(BuyStockRequest buyStockRequest);
-    Long sellStocks(SellStockRequest sellStockRequest);
+    /** 주식 매매 **/
+    // 주식 매수
+    BuyStockResponse buyStocks(Long userId, BuyStockRequest buyStockRequest);
 }

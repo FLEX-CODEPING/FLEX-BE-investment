@@ -7,9 +7,9 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 @AllArgsConstructor
-public enum InvestmentErrorCode implements BaseErrorCode {
+public enum RecentTransactionErrorCode implements BaseErrorCode {
 
-    BALANCE_NOT_SUFFICIENT(HttpStatus.BAD_REQUEST, "INVESTMENT_001", "잔고가 부족합니다."),
+    RECENT_TRANSACTION_NOT_FOUND(HttpStatus.NOT_FOUND, "RECENT_TRANSACTION_001", "회원의 최근 거래 내역이 존재하지 않습니다."),
     ;
 
     private final HttpStatus httpStatus;

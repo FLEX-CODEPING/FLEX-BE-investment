@@ -1,15 +1,15 @@
 package codeping.flex.investment.domain.exception;
 
 import codeping.flex.investment.global.common.response.code.BaseErrorCode;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 @Getter
-@AllArgsConstructor
-public enum InvestmentErrorCode implements BaseErrorCode {
+@RequiredArgsConstructor
+public enum TransactionErrorCode implements BaseErrorCode {
 
-    BALANCE_NOT_SUFFICIENT(HttpStatus.BAD_REQUEST, "INVESTMENT_001", "잔고가 부족합니다."),
+    TRANSACTION_NOT_FOUND(HttpStatus.NOT_FOUND, "TRANSACTION_001", "거래 내역이 존재하지 않습니다."),
     ;
 
     private final HttpStatus httpStatus;

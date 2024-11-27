@@ -101,8 +101,6 @@ public class SwaggerConfig {
                 .build();
     }
 
-
-
     /**
      * {@code @ApiErrorCodes} 어노테이션이 존재할 경우 {@code ApiResponses}에 {@code Example}를 추가하는 메소드
      *
@@ -111,8 +109,6 @@ public class SwaggerConfig {
      */
     private void addExamplesToResponses(ApiResponses responses, ErrorExampleHolder errorExampleHolder) {
         String responseKey = String.valueOf(errorExampleHolder.getCode());
-
-        // 기존 ApiResponse가 존재하는지 확인하고 없으면 새로 생성
         ApiResponse apiResponse = responses.computeIfAbsent(responseKey, k -> new ApiResponse());
 
         Content content = apiResponse.getContent();
@@ -121,17 +117,10 @@ public class SwaggerConfig {
             apiResponse.setContent(content);
         }
 
-        // MediaType 가져오거나 새로 생성
         MediaType mediaType = content.computeIfAbsent("application/json", k -> new MediaType());
-
-        // 에러 코드와 고유한 이름을 사용하여 예제 추가
         mediaType.addExamples(errorExampleHolder.getName() , errorExampleHolder.getExample());
-
-        // ApiResponse 객체를 responses에 추가
         responses.addApiResponse(responseKey, apiResponse);
     }
-
-
 
     /**
      * {@code BaseErrorCode}를 통해 {@code Example}를 생성하는 메소드
