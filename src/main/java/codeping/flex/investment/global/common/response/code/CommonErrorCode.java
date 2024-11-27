@@ -17,6 +17,7 @@ public enum CommonErrorCode implements BaseErrorCode {
     FORBIDDEN(HttpStatus.FORBIDDEN, "COMMON_004", "금지된 요청입니다."),
     METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "COMMON_005", "지원하지 않은 Http Method 입니다."),
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "COMMON_006", "서버 에러가 발생했습니다."),
+    INVALID_PARAMETER(HttpStatus.BAD_REQUEST, "COMMON_007", "잘못된 파라미터입니다."),
     ;
 
     private final HttpStatus httpStatus;
