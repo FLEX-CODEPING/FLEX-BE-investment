@@ -1,5 +1,8 @@
 package codeping.flex.investment.application.service.domain;
 
+import codeping.flex.investment.adapter.in.web.data.pagination.CustomPageRequest;
+import codeping.flex.investment.adapter.in.web.data.pagination.CustomSliceResponse;
+import codeping.flex.investment.adapter.in.web.data.transaction.response.UserTransactionResponse;
 import codeping.flex.investment.application.ports.in.investment.domain.TransactionUseCase;
 import codeping.flex.investment.application.ports.out.TransactionOutPort;
 import codeping.flex.investment.domain.model.Point;
@@ -7,8 +10,10 @@ import codeping.flex.investment.domain.model.Investment;
 import codeping.flex.investment.domain.model.Transaction;
 import codeping.flex.investment.global.annotation.architecture.ApplicationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Slice;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static codeping.flex.investment.application.mapper.TransactionMapper.*;
 
@@ -28,5 +33,17 @@ public class TransactionService implements TransactionUseCase {
     public Transaction savePointTransaction(Long userId, Point point, BigDecimal currentTotalProfit, BigDecimal currentBalance) {
         Transaction transaction = mapToPointTransaction(userId, point, currentTotalProfit, currentBalance);
         return transactionOutPort.saveTransaction(transaction);
+    }
+
+    @Override
+    public CustomSliceResponse<UserTransactionResponse> getAllUserTransactions(Long userId, CustomPageRequest pageRequest) {
+        Slice<Transaction> transactionSlice = transactionOutPort.getAllTransactionsByUserId(userId, pageRequest.toPageRequest());
+
+        List<UserTransactionResponse> content = transactionSlice.getContent()
+                .stream()
+                .map(UserTransactionResponse::from)
+                .toList();
+
+        return CustomSliceResponse.of(content, transactionSlice);
     }
 }
