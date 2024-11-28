@@ -7,6 +7,8 @@ import codeping.flex.investment.application.ports.out.TransactionOutPort;
 import codeping.flex.investment.domain.model.Transaction;
 import codeping.flex.investment.global.annotation.architecture.PersistenceAdapter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
@@ -20,5 +22,10 @@ public class TransactionPersistenceAdapter implements TransactionOutPort {
         TransactionEntity transactionEntity = this.transactionPersistenceMapper.toEntity(transaction);
         TransactionEntity savedEntity = this.transactionRepository.save(transactionEntity);
         return this.transactionPersistenceMapper.toDomain(savedEntity);
+    }
+
+    @Override
+    public Slice<Transaction> getAllTransactionsByUserId(final Long userId, Pageable pageable) {
+        return this.transactionRepository.findAllByUserId(userId, pageable).map(this.transactionPersistenceMapper::toDomain);
     }
 }
