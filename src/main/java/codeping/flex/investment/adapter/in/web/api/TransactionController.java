@@ -12,8 +12,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +25,7 @@ public class TransactionController {
 
     private final TransactionUseCase transactionUseCase;
 
-    @PostMapping("/all")
+    @GetMapping("/all")
     @Operation(summary = "유저 거래 내역 전체 조회", description = "특정 유저의 전체 거래 내역을 조회합니다.")
     public ApplicationResponse<CustomSliceResponse<UserTransactionResponse>> getAllUserTransactions(
             @Parameter(hidden = true) @Passport PassportInfo passportInfo,
