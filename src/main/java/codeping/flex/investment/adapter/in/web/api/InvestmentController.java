@@ -1,9 +1,9 @@
 package codeping.flex.investment.adapter.in.web.api;
 
-import codeping.flex.investment.adapter.in.web.data.pagination.CustomPageRequest;
+import codeping.flex.investment.adapter.in.web.data.investment.request.UserStockInvestmentRequest;
+import codeping.flex.investment.adapter.in.web.data.investment.response.UserStockInvestmentResponse;
 import codeping.flex.investment.adapter.in.web.data.pagination.CustomSliceResponse;
-import codeping.flex.investment.adapter.in.web.data.transaction.response.UserTransactionResponse;
-import codeping.flex.investment.application.ports.in.investment.domain.TransactionUseCase;
+import codeping.flex.investment.application.ports.in.investment.domain.InvestmentUseCase;
 import codeping.flex.investment.global.annotation.architecture.WebAdapter;
 import codeping.flex.investment.global.annotation.passport.Passport;
 import codeping.flex.investment.global.annotation.passport.PassportInfo;
@@ -19,19 +19,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 @WebAdapter
 @RestController
-@RequestMapping("/api/transactions")
+@RequestMapping("/api/investments")
 @RequiredArgsConstructor
-public class TransactionController {
+public class InvestmentController {
 
-    private final TransactionUseCase transactionUseCase;
+    private final InvestmentUseCase investmentUseCase;
 
     @GetMapping("/all")
-    @Operation(summary = "유저 거래 내역 전체 조회", description = "특정 유저의 전체 거래 내역을 조회합니다.")
-    public ApplicationResponse<CustomSliceResponse<UserTransactionResponse>> getAllUserTransactions(
+    @Operation(summary = "특정 종목 매매 내역 조회", description = "특정 유저의 특정 종목에 대한 매매 내역을 조회합니다.")
+    public ApplicationResponse<CustomSliceResponse<UserStockInvestmentResponse>> getAllUserStockInvestments(
             @Parameter(hidden = true) @Passport PassportInfo passportInfo,
-            @ModelAttribute @Valid CustomPageRequest customPageRequest
+            @ModelAttribute @Valid UserStockInvestmentRequest userStockInvestmentRequest
     ) {
-        CustomSliceResponse<UserTransactionResponse> response = transactionUseCase.getAllUserTransactions(passportInfo.userId(), customPageRequest);
+        CustomSliceResponse<UserStockInvestmentResponse> response = investmentUseCase.getAllUserStockInvestments(
+                passportInfo.userId(), userStockInvestmentRequest
+        );
         return ApplicationResponse.onSuccess(response);
     }
 }
