@@ -67,15 +67,15 @@ pipeline {
                                 # 환경 변수 설정
                                 export IMAGE_TAG=${IMAGE_TAG}
 
-                                docker compose -f docker-compose-INVESTMENT.yml up -d --no-deps INVESTMENT-service
+                                docker compose -f docker-compose-investment.yml up -d --no-deps investment-service
 
                                 # Docker Compose 파일에 IMAGE_TAG 적용
-                                sed -i "s|image: ${IMAGE_NAME}:.*|image: ${IMAGE_NAME}:${IMAGE_TAG}|" docker-compose-INVESTMENT.yml
+                                sed -i "s|image: ${IMAGE_NAME}:.*|image: ${IMAGE_NAME}:${IMAGE_TAG}|" docker-compose-investment.yml
 
 
-                                docker compose -f docker-compose-INVESTMENT.yml pull
-                                docker compose -f docker-compose-INVESTMENT.yml up -d
-                                docker compose -f docker-compose-INVESTMENT.yml ps
+                                docker compose -f docker-compose-investment.yml pull
+                                docker compose -f docker-compose-investment.yml up -d
+                                docker compose -f docker-compose-investment.yml ps
                             '
                         """
                         slackSend(channel: SLACK_CHANNEL, message: "🚀 INVESTMENT Deployment SUCCEED for Build #${env.BUILD_NUMBER}.")
