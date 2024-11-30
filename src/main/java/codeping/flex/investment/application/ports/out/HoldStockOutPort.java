@@ -1,6 +1,9 @@
 package codeping.flex.investment.application.ports.out;
 
+import codeping.flex.investment.domain.constant.HoldStatus;
 import codeping.flex.investment.domain.model.HoldStock;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 
 import java.util.Optional;
 
@@ -12,4 +15,5 @@ public interface HoldStockOutPort {
     /** GET **/
     Optional<HoldStock> getHoldStockByUserIdAndStockCode(Long userId, String stockCode);
     Optional<HoldStock> getHoldStockById(Long holdStockId);
+    Slice<HoldStock> getHoldStocksByUserIdAndHoldStatus(Long userId, HoldStatus holdStatus, Pageable pageable);
 }

@@ -1,5 +1,8 @@
 package codeping.flex.investment.application.service.domain;
 
+import codeping.flex.investment.adapter.in.web.data.holdstock.request.UserHoldStockRequest;
+import codeping.flex.investment.adapter.in.web.data.holdstock.response.UserHoldStockResponse;
+import codeping.flex.investment.adapter.in.web.data.pagination.CustomSliceResponse;
 import codeping.flex.investment.application.ports.in.investment.domain.HoldStockUseCase;
 import codeping.flex.investment.application.ports.out.HoldStockOutPort;
 import codeping.flex.investment.domain.constant.HoldStatus;
@@ -8,7 +11,9 @@ import codeping.flex.investment.domain.model.Investment;
 import codeping.flex.investment.global.annotation.architecture.ApplicationService;
 import codeping.flex.investment.global.common.exception.ApplicationException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Slice;
 
+import java.util.List;
 import java.util.Optional;
 
 import static codeping.flex.investment.application.mapper.HoldStockMapper.mapToHoldStock;
@@ -21,10 +26,19 @@ public class HoldStockService implements HoldStockUseCase {
     private final HoldStockOutPort holdStockOutPort;
 
     @Override
+    public HoldStock saveHoldStock(Long userId, String stockCode, String corpName, long quantity, Investment investment) {
+        HoldStock holdStock = mapToHoldStock(userId, stockCode, corpName, quantity, HoldStatus.HOLDING, investment);
+        return holdStockOutPort.saveHoldStock(holdStock);
+    }
+
+    @Override
     public Optional<HoldStock> getHoldStockByUserIdAndStockCode(Long userId, String stockCode) {
         return holdStockOutPort.getHoldStockByUserIdAndStockCode(userId, stockCode);
     }
 
+    /**
+     * 특정 유저가 보유하고 있는 종목을 HoldStatus 에 따라 조회하여 반환합니다.
+     */
     @Override
     public HoldStock getHoldStockById(Long holdStockId) {
         return holdStockOutPort.getHoldStockById(holdStockId)
@@ -32,9 +46,17 @@ public class HoldStockService implements HoldStockUseCase {
     }
 
     @Override
-    public HoldStock saveHoldStock(Long userId, String stockCode, String corpName, long quantity, Investment investment) {
-        HoldStock holdStock = mapToHoldStock(userId, stockCode, corpName, quantity, HoldStatus.HOLDING, investment);
-        return holdStockOutPort.saveHoldStock(holdStock);
+    public CustomSliceResponse<UserHoldStockResponse> getUserHoldStocks(Long userId, UserHoldStockRequest userHoldStockRequest) {
+        Slice<HoldStock> holdStockSlice = holdStockOutPort.getHoldStocksByUserIdAndHoldStatus(
+                userId, userHoldStockRequest.holdStatus(), userHoldStockRequest.customPageRequest().toPageRequest()
+        );
+
+        List<UserHoldStockResponse> content = holdStockSlice.getContent()
+                .stream()
+                .map(UserHoldStockResponse::from)
+                .toList();
+
+        return CustomSliceResponse.of(content, holdStockSlice);
     }
 
     /**

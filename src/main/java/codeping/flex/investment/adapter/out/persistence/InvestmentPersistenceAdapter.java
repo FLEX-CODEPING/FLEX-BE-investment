@@ -7,6 +7,8 @@ import codeping.flex.investment.application.ports.out.InvestmentOutPort;
 import codeping.flex.investment.domain.model.Investment;
 import codeping.flex.investment.global.annotation.architecture.PersistenceAdapter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 
 import java.util.Optional;
 
@@ -28,5 +30,10 @@ public class InvestmentPersistenceAdapter implements InvestmentOutPort {
     public Optional<Investment> getInvestmentById(final Long investmentId) {
         final Optional<InvestmentEntity> investmentEntity = this.investmentRepository.findById(investmentId);
         return investmentEntity.map(this.investmentPersistenceMapper::toDomain);
+    }
+
+    @Override
+    public Slice<Investment> getAllInvestmentsByUserIdAndStockCode(final Long userId, final String stockCode, Pageable pageable) {
+        return this.investmentRepository.findAllByUserIdAndStockCode(userId, stockCode, pageable).map(this.investmentPersistenceMapper::toDomain);
     }
 }

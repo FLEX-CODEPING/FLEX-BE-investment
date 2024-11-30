@@ -1,5 +1,8 @@
 package codeping.flex.investment.application.service.domain;
 
+import codeping.flex.investment.adapter.in.web.data.investment.request.UserStockInvestmentRequest;
+import codeping.flex.investment.adapter.in.web.data.investment.response.UserStockInvestmentResponse;
+import codeping.flex.investment.adapter.in.web.data.pagination.CustomSliceResponse;
 import codeping.flex.investment.adapter.in.web.data.trading.request.BuyStockRequest;
 import codeping.flex.investment.adapter.in.web.data.trading.request.SellStockRequest;
 import codeping.flex.investment.application.ports.in.investment.domain.InvestmentUseCase;
@@ -8,8 +11,10 @@ import codeping.flex.investment.domain.constant.InvestType;
 import codeping.flex.investment.domain.model.Investment;
 import codeping.flex.investment.global.annotation.architecture.ApplicationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Slice;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static codeping.flex.investment.application.mapper.InvestmentMapper.mapToInvestment;
 
@@ -35,5 +40,19 @@ public class InvestmentService implements InvestmentUseCase {
                 sellStockRequest.quantity(), sellStockRequest.price(), totalPrice, profit
         );
         return investmentOutPort.saveInvestment(investment);
+    }
+
+    @Override
+    public CustomSliceResponse<UserStockInvestmentResponse> getAllUserStockInvestments(Long userId, UserStockInvestmentRequest request) {
+        Slice<Investment> investmentSlice = investmentOutPort.getAllInvestmentsByUserIdAndStockCode(
+                userId, request.stockCode(), request.customPageRequest().toPageRequest()
+        );
+
+        List<UserStockInvestmentResponse> content = investmentSlice.getContent()
+                .stream()
+                .map(UserStockInvestmentResponse::from)
+                .toList();
+
+        return CustomSliceResponse.of(content, investmentSlice);
     }
 }
