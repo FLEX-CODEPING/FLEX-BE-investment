@@ -6,7 +6,6 @@ spring:
       - eureka.yml
       - mysql.yml
       - swagger.yml
-      - env.properties
   application:
     name: investment-service
 
