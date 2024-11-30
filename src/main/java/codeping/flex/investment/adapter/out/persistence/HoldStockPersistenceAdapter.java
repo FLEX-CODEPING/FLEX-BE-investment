@@ -34,6 +34,12 @@ public class HoldStockPersistenceAdapter implements HoldStockOutPort {
     }
 
     @Override
+    public Optional<HoldStock> getHoldStockById(Long holdStockId) {
+        final Optional<HoldStockEntity> holdStockEntity = holdStockRepository.findById(holdStockId);
+        return holdStockEntity.map(this.holdStockPersistenceMapper::toDomain);
+    }
+
+    @Override
     public Slice<HoldStock> getHoldStocksByUserIdAndHoldStatus(Long userId, HoldStatus holdStatus, Pageable pageable) {
         return holdStockRepository.findAllByUserIdAndHoldStatus(userId, holdStatus, pageable).map(this.holdStockPersistenceMapper::toDomain);
     }

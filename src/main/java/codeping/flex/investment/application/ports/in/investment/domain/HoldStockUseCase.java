@@ -17,6 +17,7 @@ public interface HoldStockUseCase {
     /** GET **/
     // 보유 종목 조회 - userId && stockCode
     Optional<HoldStock> getHoldStockByUserIdAndStockCode(Long userId, String stockCode);
+    HoldStock getHoldStockById(Long holdStockId);
     // 보유 종목 조회 - userId && HoldStatus
     CustomSliceResponse<UserHoldStockResponse> getUserHoldStocks(Long userId, UserHoldStockRequest userHoldStockRequest);
 

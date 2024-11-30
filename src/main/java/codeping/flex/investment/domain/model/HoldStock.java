@@ -62,7 +62,47 @@ public class HoldStock extends BaseTime {
         this.recentInvestment = investment;
     }
 
-    public boolean hasEnoughHoldings(long amount) {
-        return this.totalHoldings >= amount;
+    /**
+     * 매도 시, 해당 보유 종목 정보를 업데이트합니다.
+     *
+     * @param quantity 매도 수량
+     */
+    public void sell(long quantity, Investment investment) {
+        // 원금 재계산
+        BigDecimal costBasis = this.avgPrice.multiply(BigDecimal.valueOf(quantity));
+        this.principal = this.principal.subtract(costBasis);
+
+        // 보유 수량 감소
+        this.totalHoldings -= quantity;
+
+        // 보유 수량이 0이면 SOLD 상태로 변경
+        if (this.totalHoldings == 0) {
+            this.holdStatus = HoldStatus.SOLD;
+            this.avgPrice = BigDecimal.ZERO;
+            this.principal = BigDecimal.ZERO;
+        }
+
+        // 최근 거래 업데이트
+        this.recentInvestment = investment;
+    }
+
+    /**
+     * 매도 수익을 계산합니다.
+     *
+     * @param quantity 매도 수량
+     * @param sellPrice 매도 단가
+     * @return 매도 수익
+     */
+    public BigDecimal calculateSellProfit(long quantity, BigDecimal sellPrice) {
+        BigDecimal sellTotalPrice = sellPrice.multiply(BigDecimal.valueOf(quantity));
+        BigDecimal costBasis = this.avgPrice.multiply(BigDecimal.valueOf(quantity));
+        return sellTotalPrice.subtract(costBasis);
+    }
+
+    /**
+     * 현재 보유 수량과 입력 수량을 비교합니다.
+     */
+    public boolean isHoldingsSufficient(long quantity) {
+        return this.totalHoldings >= quantity;
     }
 }

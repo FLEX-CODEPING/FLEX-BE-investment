@@ -13,15 +13,14 @@ public class TransactionMapper {
     }
 
     /**
-     * 매수에 대한 거래 내역을 생성합니다.
-     * totalProfit 은 그대로 유지하며, balance 에서 매수 금액을 차감합니다.
+     * 매매에 대한 거래 내역을 저장합니다.
      */
     public static Transaction mapToInvestmentTransaction(Long userId, Investment investment, BigDecimal currentTotalProfit, BigDecimal currentBalance) {
         return Transaction.builder()
                 .userId(userId)
                 .investment(investment)
                 .totalProfit(currentTotalProfit)
-                .balance(currentBalance.subtract(investment.getTotalPrice()))
+                .balance(currentBalance)
                 .build();
     }
 

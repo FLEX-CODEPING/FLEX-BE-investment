@@ -1,5 +1,6 @@
 package codeping.flex.investment.global.annotation.swagger;
 
+import codeping.flex.investment.domain.exception.HoldStockErrorCode;
 import codeping.flex.investment.domain.exception.InvestmentErrorCode;
 import codeping.flex.investment.domain.exception.RecentTransactionErrorCode;
 import codeping.flex.investment.domain.exception.TransactionErrorCode;
@@ -15,4 +16,5 @@ public @interface ApiErrorCodes {
 	InvestmentErrorCode[] investmentErrors() default {};
 	RecentTransactionErrorCode[] recentTransactionErrors() default {};
 	TransactionErrorCode[] transactionErrors() default {};
+	HoldStockErrorCode[] holdStockErrors() default {};
 }

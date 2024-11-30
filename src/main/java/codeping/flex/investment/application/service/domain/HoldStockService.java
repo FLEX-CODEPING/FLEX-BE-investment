@@ -9,6 +9,7 @@ import codeping.flex.investment.domain.constant.HoldStatus;
 import codeping.flex.investment.domain.model.HoldStock;
 import codeping.flex.investment.domain.model.Investment;
 import codeping.flex.investment.global.annotation.architecture.ApplicationService;
+import codeping.flex.investment.global.common.exception.ApplicationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Slice;
 
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static codeping.flex.investment.application.mapper.HoldStockMapper.mapToHoldStock;
+import static codeping.flex.investment.domain.exception.HoldStockErrorCode.HOLD_STOCK_NOT_FOUND;
 
 @ApplicationService
 @RequiredArgsConstructor
@@ -37,6 +39,12 @@ public class HoldStockService implements HoldStockUseCase {
     /**
      * 특정 유저가 보유하고 있는 종목을 HoldStatus 에 따라 조회하여 반환합니다.
      */
+    @Override
+    public HoldStock getHoldStockById(Long holdStockId) {
+        return holdStockOutPort.getHoldStockById(holdStockId)
+                .orElseThrow(() -> ApplicationException.from(HOLD_STOCK_NOT_FOUND));
+    }
+
     @Override
     public CustomSliceResponse<UserHoldStockResponse> getUserHoldStocks(Long userId, UserHoldStockRequest userHoldStockRequest) {
         Slice<HoldStock> holdStockSlice = holdStockOutPort.getHoldStocksByUserIdAndHoldStatus(

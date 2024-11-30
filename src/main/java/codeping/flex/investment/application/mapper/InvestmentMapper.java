@@ -1,6 +1,7 @@
 package codeping.flex.investment.application.mapper;
 
 import codeping.flex.investment.adapter.in.web.data.trading.request.BuyStockRequest;
+import codeping.flex.investment.adapter.in.web.data.trading.request.SellStockRequest;
 import codeping.flex.investment.domain.constant.InvestType;
 import codeping.flex.investment.domain.model.Investment;
 
@@ -12,16 +13,19 @@ public class InvestmentMapper {
         throw new IllegalArgumentException();
     }
 
-    public static Investment mapToInvestment(Long userId, InvestType investType, BuyStockRequest buyStockRequest, BigDecimal totalPrice) {
+    public static Investment mapToInvestment(
+            Long userId, String stockCode, String corpName, InvestType investType,
+            int quantity, BigDecimal price, BigDecimal totalPrice, BigDecimal profit
+    ) {
         return Investment.builder()
                 .userId(userId)
-                .stockCode(buyStockRequest.stockCode())
-                .corpName(buyStockRequest.corpName())
+                .stockCode(stockCode)
+                .corpName(corpName)
                 .investType(investType)
-                .quantity(buyStockRequest.quantity())
-                .price(buyStockRequest.price())
+                .quantity(quantity)
+                .price(price)
                 .totalPrice(totalPrice)
-                .profit(BigDecimal.ZERO)
+                .profit(profit)
                 .build();
     }
 }

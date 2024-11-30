@@ -4,6 +4,7 @@ import codeping.flex.investment.adapter.in.web.data.investment.request.UserStock
 import codeping.flex.investment.adapter.in.web.data.investment.response.UserStockInvestmentResponse;
 import codeping.flex.investment.adapter.in.web.data.pagination.CustomSliceResponse;
 import codeping.flex.investment.adapter.in.web.data.trading.request.BuyStockRequest;
+import codeping.flex.investment.adapter.in.web.data.trading.request.SellStockRequest;
 import codeping.flex.investment.application.ports.in.investment.domain.InvestmentUseCase;
 import codeping.flex.investment.application.ports.out.InvestmentOutPort;
 import codeping.flex.investment.domain.constant.InvestType;
@@ -25,7 +26,19 @@ public class InvestmentService implements InvestmentUseCase {
 
     @Override
     public Investment saveBuyTypeInvestment(Long userId, BuyStockRequest buyStockRequest, BigDecimal totalPrice) {
-        Investment investment = mapToInvestment(userId, InvestType.BUY, buyStockRequest, totalPrice);
+        Investment investment = mapToInvestment(
+                userId, buyStockRequest.stockCode(), buyStockRequest.corpName(), InvestType.BUY,
+                buyStockRequest.quantity(), buyStockRequest.price(), totalPrice, BigDecimal.ZERO
+        );
+        return investmentOutPort.saveInvestment(investment);
+    }
+
+    @Override
+    public Investment saveSellTypeInvestment(Long userId, SellStockRequest sellStockRequest, BigDecimal totalPrice, BigDecimal profit) {
+        Investment investment = mapToInvestment(
+                userId, sellStockRequest.stockCode(), sellStockRequest.corpName(), InvestType.SELL,
+                sellStockRequest.quantity(), sellStockRequest.price(), totalPrice, profit
+        );
         return investmentOutPort.saveInvestment(investment);
     }
 
