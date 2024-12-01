@@ -22,7 +22,7 @@ public record SellStockRequest(
 
         @Schema(description = "매도 총 금액", example = "100000")
         @NotNull
-        BigDecimal totalBuyPrice,
+        BigDecimal totalPrice,
 
         @Schema(description = "종목 코드", example = "005930")
         @NotBlank
