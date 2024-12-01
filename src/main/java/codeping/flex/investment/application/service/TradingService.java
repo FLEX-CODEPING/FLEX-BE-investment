@@ -1,9 +1,9 @@
 package codeping.flex.investment.application.service;
 
-import codeping.flex.investment.adapter.in.web.data.trading.request.BuyStockRequest;
-import codeping.flex.investment.adapter.in.web.data.trading.request.SellStockRequest;
-import codeping.flex.investment.adapter.in.web.data.trading.response.BuyStockResponse;
-import codeping.flex.investment.adapter.in.web.data.trading.response.SellStockResponse;
+import codeping.flex.investment.adapter.in.web.data.investment.request.BuyStockRequest;
+import codeping.flex.investment.adapter.in.web.data.investment.request.SellStockRequest;
+import codeping.flex.investment.adapter.in.web.data.investment.response.BuyStockResponse;
+import codeping.flex.investment.adapter.in.web.data.investment.response.SellStockResponse;
 import codeping.flex.investment.application.ports.in.investment.TradingUseCase;
 import codeping.flex.investment.application.ports.in.investment.domain.HoldStockUseCase;
 import codeping.flex.investment.application.ports.in.investment.domain.InvestmentUseCase;

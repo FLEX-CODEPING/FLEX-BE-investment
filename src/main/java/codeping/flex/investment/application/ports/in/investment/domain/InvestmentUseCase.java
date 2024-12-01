@@ -3,8 +3,8 @@ package codeping.flex.investment.application.ports.in.investment.domain;
 import codeping.flex.investment.adapter.in.web.data.investment.request.UserStockInvestmentRequest;
 import codeping.flex.investment.adapter.in.web.data.investment.response.UserStockInvestmentResponse;
 import codeping.flex.investment.adapter.in.web.data.pagination.CustomSliceResponse;
-import codeping.flex.investment.adapter.in.web.data.trading.request.BuyStockRequest;
-import codeping.flex.investment.adapter.in.web.data.trading.request.SellStockRequest;
+import codeping.flex.investment.adapter.in.web.data.investment.request.BuyStockRequest;
+import codeping.flex.investment.adapter.in.web.data.investment.request.SellStockRequest;
 import codeping.flex.investment.domain.model.Investment;
 
 import java.math.BigDecimal;

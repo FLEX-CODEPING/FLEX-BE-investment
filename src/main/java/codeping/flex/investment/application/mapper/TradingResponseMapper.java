@@ -1,7 +1,7 @@
 package codeping.flex.investment.application.mapper;
 
-import codeping.flex.investment.adapter.in.web.data.trading.response.BuyStockResponse;
-import codeping.flex.investment.adapter.in.web.data.trading.response.SellStockResponse;
+import codeping.flex.investment.adapter.in.web.data.investment.response.BuyStockResponse;
+import codeping.flex.investment.adapter.in.web.data.investment.response.SellStockResponse;
 import codeping.flex.investment.domain.model.Investment;
 
 import java.math.BigDecimal;
