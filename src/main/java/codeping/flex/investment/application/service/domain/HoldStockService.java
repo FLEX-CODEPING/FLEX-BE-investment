@@ -12,6 +12,7 @@ import codeping.flex.investment.global.annotation.architecture.ApplicationServic
 import codeping.flex.investment.global.common.exception.ApplicationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Slice;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,12 +27,14 @@ public class HoldStockService implements HoldStockUseCase {
     private final HoldStockOutPort holdStockOutPort;
 
     @Override
+    @Transactional
     public HoldStock saveHoldStock(Long userId, String stockCode, String corpName, long quantity, Investment investment) {
         HoldStock holdStock = mapToHoldStock(userId, stockCode, corpName, quantity, HoldStatus.HOLDING, investment);
         return holdStockOutPort.saveHoldStock(holdStock);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<HoldStock> getHoldStockByUserIdAndStockCode(Long userId, String stockCode) {
         return holdStockOutPort.getHoldStockByUserIdAndStockCode(userId, stockCode);
     }
@@ -40,12 +43,14 @@ public class HoldStockService implements HoldStockUseCase {
      * 특정 유저가 보유하고 있는 종목을 HoldStatus 에 따라 조회하여 반환합니다.
      */
     @Override
+    @Transactional(readOnly = true)
     public HoldStock getHoldStockById(Long holdStockId) {
         return holdStockOutPort.getHoldStockById(holdStockId)
                 .orElseThrow(() -> ApplicationException.from(HOLD_STOCK_NOT_FOUND));
     }
 
     @Override
+    @Transactional(readOnly = true)
     public CustomSliceResponse<UserHoldStockResponse> getUserHoldStocks(Long userId, UserHoldStockRequest userHoldStockRequest) {
         Slice<HoldStock> holdStockSlice = holdStockOutPort.getHoldStocksByUserIdAndHoldStatus(
                 userId, userHoldStockRequest.holdStatus(), userHoldStockRequest.customPageRequest().toPageRequest()
@@ -67,6 +72,7 @@ public class HoldStockService implements HoldStockUseCase {
      * @param investment 매수 정보
      */
     @Override
+    @Transactional
     public void updateBuyOrCreateHoldStock(Long userId, Investment investment) {
         Optional<HoldStock> holdStock = getHoldStockByUserIdAndStockCode(userId, investment.getStockCode());
 

@@ -12,6 +12,7 @@ import codeping.flex.investment.domain.model.Investment;
 import codeping.flex.investment.global.annotation.architecture.ApplicationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Slice;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -25,6 +26,7 @@ public class InvestmentService implements InvestmentUseCase {
     private final InvestmentOutPort investmentOutPort;
 
     @Override
+    @Transactional
     public Investment saveBuyTypeInvestment(Long userId, BuyStockRequest buyStockRequest, BigDecimal totalPrice) {
         Investment investment = mapToInvestment(
                 userId, buyStockRequest.stockCode(), buyStockRequest.corpName(), InvestType.BUY,
@@ -34,6 +36,7 @@ public class InvestmentService implements InvestmentUseCase {
     }
 
     @Override
+    @Transactional
     public Investment saveSellTypeInvestment(Long userId, SellStockRequest sellStockRequest, BigDecimal totalPrice, BigDecimal profit) {
         Investment investment = mapToInvestment(
                 userId, sellStockRequest.stockCode(), sellStockRequest.corpName(), InvestType.SELL,
@@ -43,6 +46,7 @@ public class InvestmentService implements InvestmentUseCase {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public CustomSliceResponse<UserStockInvestmentResponse> getAllUserStockInvestments(Long userId, UserStockInvestmentRequest request) {
         Slice<Investment> investmentSlice = investmentOutPort.getAllInvestmentsByUserIdAndStockCode(
                 userId, request.stockCode(), request.customPageRequest().toPageRequest()

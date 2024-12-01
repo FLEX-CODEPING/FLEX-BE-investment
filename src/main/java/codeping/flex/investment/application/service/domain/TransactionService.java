@@ -11,6 +11,7 @@ import codeping.flex.investment.domain.model.Transaction;
 import codeping.flex.investment.global.annotation.architecture.ApplicationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Slice;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -24,18 +25,21 @@ public class TransactionService implements TransactionUseCase {
     private final TransactionOutPort transactionOutPort;
 
     @Override
+    @Transactional
     public Transaction saveInvestmentTransaction(Long userId, Investment investment, BigDecimal currentTotalProfit, BigDecimal currentBalance) {
         Transaction transaction = mapToInvestmentTransaction(userId, investment, currentTotalProfit, currentBalance);
         return transactionOutPort.saveTransaction(transaction);
     }
 
     @Override
+    @Transactional
     public Transaction saveCreditTransaction(Long userId, Credit credit, BigDecimal currentTotalProfit, BigDecimal currentBalance) {
         Transaction transaction = mapToCreditTransaction(userId, credit, currentTotalProfit, currentBalance);
         return transactionOutPort.saveTransaction(transaction);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public CustomSliceResponse<UserTransactionResponse> getAllUserTransactions(Long userId, CustomPageRequest pageRequest) {
         Slice<Transaction> transactionSlice = transactionOutPort.getAllTransactionsByUserId(userId, pageRequest.toPageRequest());
 
