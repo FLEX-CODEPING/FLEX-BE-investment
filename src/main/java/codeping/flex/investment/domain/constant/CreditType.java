@@ -3,9 +3,10 @@ package codeping.flex.investment.domain.constant;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public enum PointType implements CodedEnum{
-    INVESTMENT("0","활동"),
-    BLOG("1","블로그"),
+public enum CreditType implements CodedEnum {
+
+    INVESTMENT("0", "활동"),
+    BLOG("1", "블로그"),
     ;
 
     private final String code;

@@ -30,8 +30,8 @@ public class TransactionEntity extends BaseTimeEntity {
     private InvestmentEntity investment;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "point_id")
-    private PointEntity point;
+    @JoinColumn(name = "credit_id")
+    private CreditEntity credit;
 
     @Comment("총 수익")
     @Column(nullable = false)
@@ -43,12 +43,12 @@ public class TransactionEntity extends BaseTimeEntity {
 
     @Builder
     public TransactionEntity(
-            Long userId, InvestmentEntity investment, PointEntity pointEntity,
+            Long userId, InvestmentEntity investment, CreditEntity credit,
             BigDecimal totalProfit, BigDecimal balance
     ) {
         this.userId = userId;
         this.investment = investment;
-        this.point = pointEntity;
+        this.credit = credit;
         this.totalProfit = totalProfit;
         this.balance = balance;
     }

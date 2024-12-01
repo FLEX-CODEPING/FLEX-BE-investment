@@ -1,8 +1,8 @@
 package codeping.flex.investment.adapter.out.persistence.entity;
 
-import codeping.flex.investment.adapter.out.persistence.converter.PointTypeConverter;
+import codeping.flex.investment.adapter.out.persistence.converter.CreditTypeConverter;
 import codeping.flex.investment.adapter.out.persistence.entity.common.BaseTimeEntity;
-import codeping.flex.investment.domain.constant.PointType;
+import codeping.flex.investment.domain.constant.CreditType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -12,28 +12,28 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "point")
-public class PointEntity extends BaseTimeEntity {
+@Table(name = "credit")
+public class CreditEntity extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
-    private Long pointId;
+    private Long creditId;
 
     @Column(nullable = false)
     private Long userId;
 
     @Column(nullable = false)
-    private long point;
+    private long credits;
 
-    @Convert(converter = PointTypeConverter.class)
+    @Convert(converter = CreditTypeConverter.class)
     @Column(nullable = false)
-    private PointType type;
+    private CreditType creditType;
 
     @Builder
-    public PointEntity(Long userId, long point, PointType pointType) {
+    public CreditEntity(Long userId, long credits, CreditType creditType) {
         this.userId = userId;
-        this.point = point;
-        this.type = pointType;
+        this.credits = credits;
+        this.creditType = creditType;
     }
 }
