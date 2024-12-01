@@ -17,7 +17,7 @@ public record UserTransactionResponse(
         InvestmentTransactionResponse investment,
 
         @Schema(description = "크레딧 정보")
-        PointTransactionResponse credit,
+        CreditTransactionResponse credit,
 
         @Schema(description = "총 수익", example = "500000")
         BigDecimal totalProfit,
@@ -30,7 +30,7 @@ public record UserTransactionResponse(
                 transaction.getTransactionId(),
                 transaction.getUserId(),
                 transaction.getInvestment() != null ? InvestmentTransactionResponse.from(transaction.getInvestment()) : null,
-                transaction.getPoint() != null ? PointTransactionResponse.from(transaction.getPoint()) : null,
+                transaction.getCredit() != null ? CreditTransactionResponse.from(transaction.getCredit()) : null,
                 transaction.getTotalProfit(),
                 transaction.getBalance()
         );
