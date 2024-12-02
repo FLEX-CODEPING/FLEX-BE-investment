@@ -17,7 +17,7 @@ public class CustomPageRequest {
     @Schema(description = "페이지 사이즈", nullable = true, example = "20", defaultValue = "20")
     private int size = 20;
 
-    @Schema(description = "정렬 조건 (createdAt | ...)", nullable = true, example = "createAt", defaultValue = "createAt")
+    @Schema(description = "정렬 조건 (createdAt | ...)", nullable = true, example = "createdAt", defaultValue = "createdAt")
     private String property = "createdAt";
 
     @Schema(description = "정렬 방향 (desc | asc)", nullable = true, example = "desc", defaultValue = "desc")
