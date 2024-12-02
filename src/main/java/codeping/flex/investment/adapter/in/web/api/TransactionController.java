@@ -25,7 +25,7 @@ public class TransactionController {
 
     private final TransactionUseCase transactionUseCase;
 
-    @GetMapping("/all")
+    @GetMapping
     @Operation(summary = "유저 거래 내역 전체 조회", description = "특정 유저의 전체 거래 내역을 조회합니다.")
     public ApplicationResponse<CustomSliceResponse<UserTransactionResponse>> getAllUserTransactions(
             @Parameter(hidden = true) @Passport PassportInfo passportInfo,

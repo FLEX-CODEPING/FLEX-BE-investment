@@ -6,10 +6,12 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 
 @Getter
+@SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Investment extends BaseTime {
 
@@ -24,7 +26,8 @@ public class Investment extends BaseTime {
     private BigDecimal profit; // 매매 차익
 
     @Builder
-    public Investment(Long userId, String stockCode, String corpName, InvestType investType, int quantity, BigDecimal price, BigDecimal totalPrice, BigDecimal profit) {
+    public Investment(Long investmentId, Long userId, String stockCode, String corpName, InvestType investType, int quantity, BigDecimal price, BigDecimal totalPrice, BigDecimal profit) {
+        this.investmentId = investmentId;
         this.userId = userId;
         this.stockCode = stockCode;
         this.corpName = corpName;

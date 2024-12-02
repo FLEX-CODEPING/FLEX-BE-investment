@@ -6,11 +6,13 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "recent_transaction")
 public class RecentTransactionEntity extends BaseTimeEntity {
@@ -30,9 +32,10 @@ public class RecentTransactionEntity extends BaseTimeEntity {
     private LocalDateTime recentTransactionAt;
 
     @Builder
-    public RecentTransactionEntity(Long userId, TransactionEntity transactionEntity) {
+    public RecentTransactionEntity(Long recentTransactionId, Long userId, TransactionEntity transaction) {
+        this.recentTransactionId = recentTransactionId;
         this.userId = userId;
-        this.transaction = transactionEntity;
+        this.transaction = transaction;
     }
 
     @PrePersist

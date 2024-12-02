@@ -1,7 +1,5 @@
 package codeping.flex.investment.application.mapper;
 
-import codeping.flex.investment.adapter.in.web.data.trading.request.BuyStockRequest;
-import codeping.flex.investment.adapter.in.web.data.trading.request.SellStockRequest;
 import codeping.flex.investment.domain.constant.InvestType;
 import codeping.flex.investment.domain.model.Investment;
 

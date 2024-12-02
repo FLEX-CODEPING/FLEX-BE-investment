@@ -1,4 +1,4 @@
-package codeping.flex.investment.adapter.in.web.data.trading.request;
+package codeping.flex.investment.adapter.in.web.data.investment.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
@@ -22,7 +22,7 @@ public record SellStockRequest(
 
         @Schema(description = "매도 총 금액", example = "100000")
         @NotNull
-        BigDecimal totalBuyPrice,
+        BigDecimal totalPrice,
 
         @Schema(description = "종목 코드", example = "005930")
         @NotBlank

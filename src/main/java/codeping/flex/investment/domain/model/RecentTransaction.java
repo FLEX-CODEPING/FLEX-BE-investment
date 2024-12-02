@@ -5,8 +5,10 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Getter
+@SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class RecentTransaction extends BaseTime {
 
@@ -15,7 +17,8 @@ public class RecentTransaction extends BaseTime {
     private Transaction transaction;
 
     @Builder
-    public RecentTransaction(Long userId, Transaction transaction) {
+    public RecentTransaction(Long recentTransactionId, Long userId, Transaction transaction) {
+        this.recentTransactionId = recentTransactionId;
         this.userId = userId;
         this.transaction = transaction;
     }

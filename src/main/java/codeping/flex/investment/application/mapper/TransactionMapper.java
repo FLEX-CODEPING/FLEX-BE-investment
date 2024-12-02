@@ -1,6 +1,6 @@
 package codeping.flex.investment.application.mapper;
 
-import codeping.flex.investment.domain.model.Point;
+import codeping.flex.investment.domain.model.Credit;
 import codeping.flex.investment.domain.model.Investment;
 import codeping.flex.investment.domain.model.Transaction;
 
@@ -28,12 +28,12 @@ public class TransactionMapper {
      * 크레딧 적립 또는 차감에 대한 거래 내역을 생성합니다.
      * totalProfit 은 그대로 유지하며, balance 에서 크레딧을 적립 또는 차감합니다.
      */
-    public static Transaction mapToPointTransaction(Long userId, Point point, BigDecimal currentTotalProfit, BigDecimal currentBalance) {
+    public static Transaction mapToCreditTransaction(Long userId, Credit credit, BigDecimal currentTotalProfit, BigDecimal currentBalance) {
         return Transaction.builder()
                 .userId(userId)
-                .point(point)
+                .credit(credit)
                 .totalProfit(currentTotalProfit)
-                .balance(currentBalance.add(BigDecimal.valueOf(point.getPointAmount())))
+                .balance(currentBalance.add(BigDecimal.valueOf(credit.getCredits())))
                 .build();
     }
 }

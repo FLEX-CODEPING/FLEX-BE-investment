@@ -7,8 +7,7 @@ import codeping.flex.investment.domain.model.Transaction;
 import codeping.flex.investment.global.annotation.architecture.ApplicationService;
 import codeping.flex.investment.global.common.exception.ApplicationException;
 import lombok.RequiredArgsConstructor;
-
-import java.util.Optional;
+import org.springframework.transaction.annotation.Transactional;
 
 import static codeping.flex.investment.application.mapper.RecentTransactionMapper.mapToRecentTransaction;
 import static codeping.flex.investment.domain.exception.RecentTransactionErrorCode.RECENT_TRANSACTION_NOT_FOUND;
@@ -20,17 +19,20 @@ public class RecentTransactionService implements RecentTransactionUseCase {
     private final RecentTransactionOutPort recentTransactionOutPort;
 
     @Override
+    @Transactional
     public RecentTransaction saveRecentTransaction(Long userId, Transaction transaction) {
         RecentTransaction recentTransaction = mapToRecentTransaction(userId, transaction);
         return recentTransactionOutPort.saveRecentTransaction(recentTransaction);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public RecentTransaction getRecentTransactionByUserId(Long userId) {
         return findRecentTransactionOrThrow(userId);
     }
 
     @Override
+    @Transactional
     public RecentTransaction updateRecentTransaction(Long userId, Transaction transaction) {
         RecentTransaction recentTransaction = findRecentTransactionOrThrow(userId);
         recentTransaction.synchronizeRecentTransaction(transaction);

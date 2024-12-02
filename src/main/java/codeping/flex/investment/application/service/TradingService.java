@@ -1,9 +1,9 @@
 package codeping.flex.investment.application.service;
 
-import codeping.flex.investment.adapter.in.web.data.trading.request.BuyStockRequest;
-import codeping.flex.investment.adapter.in.web.data.trading.request.SellStockRequest;
-import codeping.flex.investment.adapter.in.web.data.trading.response.BuyStockResponse;
-import codeping.flex.investment.adapter.in.web.data.trading.response.SellStockResponse;
+import codeping.flex.investment.adapter.in.web.data.investment.request.BuyStockRequest;
+import codeping.flex.investment.adapter.in.web.data.investment.request.SellStockRequest;
+import codeping.flex.investment.adapter.in.web.data.investment.response.BuyStockResponse;
+import codeping.flex.investment.adapter.in.web.data.investment.response.SellStockResponse;
 import codeping.flex.investment.application.ports.in.investment.TradingUseCase;
 import codeping.flex.investment.application.ports.in.investment.domain.HoldStockUseCase;
 import codeping.flex.investment.application.ports.in.investment.domain.InvestmentUseCase;
@@ -15,6 +15,7 @@ import codeping.flex.investment.domain.model.RecentTransaction;
 import codeping.flex.investment.domain.model.Transaction;
 import codeping.flex.investment.global.annotation.architecture.ApplicationService;
 import codeping.flex.investment.global.common.exception.ApplicationException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
@@ -27,6 +28,7 @@ import static codeping.flex.investment.domain.exception.InvestmentErrorCode.BALA
 
 @ApplicationService
 @RequiredArgsConstructor
+@Transactional
 public class TradingService implements TradingUseCase {
 
     private final InvestmentUseCase investmentUseCase;
@@ -78,6 +80,7 @@ public class TradingService implements TradingUseCase {
 
         // 보유 주식 업데이트
         holdStock.sell(sellStockRequest.quantity(), transaction.getInvestment());
+        holdStockUseCase.saveHoldStock(holdStock);
 
         // 최신 거래내역 업데이트
         recentTransactionUseCase.updateRecentTransaction(userId, transaction);
