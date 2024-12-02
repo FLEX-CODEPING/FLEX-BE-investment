@@ -1,10 +1,10 @@
 package codeping.flex.investment.application.service.domain;
 
-import codeping.flex.investment.adapter.in.web.data.investment.request.UserStockInvestmentRequest;
-import codeping.flex.investment.adapter.in.web.data.investment.response.UserStockInvestmentResponse;
-import codeping.flex.investment.adapter.in.web.data.pagination.CustomSliceResponse;
 import codeping.flex.investment.adapter.in.web.data.investment.request.BuyStockRequest;
 import codeping.flex.investment.adapter.in.web.data.investment.request.SellStockRequest;
+import codeping.flex.investment.adapter.in.web.data.investment.response.UserStockInvestmentResponse;
+import codeping.flex.investment.adapter.in.web.data.pagination.CustomPageRequest;
+import codeping.flex.investment.adapter.in.web.data.pagination.CustomSliceResponse;
 import codeping.flex.investment.application.ports.in.investment.domain.InvestmentUseCase;
 import codeping.flex.investment.application.ports.out.InvestmentOutPort;
 import codeping.flex.investment.domain.constant.InvestType;
@@ -47,10 +47,8 @@ public class InvestmentService implements InvestmentUseCase {
 
     @Override
     @Transactional(readOnly = true)
-    public CustomSliceResponse<UserStockInvestmentResponse> getAllUserStockInvestments(Long userId, UserStockInvestmentRequest request) {
-        Slice<Investment> investmentSlice = investmentOutPort.getAllInvestmentsByUserIdAndStockCode(
-                userId, request.stockCode(), request.customPageRequest().toPageRequest()
-        );
+    public CustomSliceResponse<UserStockInvestmentResponse> getUserInvestmentsByStockCode(Long userId, String stockCode, CustomPageRequest customPageRequest) {
+        Slice<Investment> investmentSlice = investmentOutPort.getAllInvestmentsByUserIdAndStockCode(userId, stockCode, customPageRequest.toPageRequest());
 
         List<UserStockInvestmentResponse> content = investmentSlice.getContent()
                 .stream()
