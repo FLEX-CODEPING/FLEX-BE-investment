@@ -8,9 +8,11 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Getter
+@SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "credit")
 public class CreditEntity extends BaseTimeEntity {
@@ -31,7 +33,8 @@ public class CreditEntity extends BaseTimeEntity {
     private CreditType creditType;
 
     @Builder
-    public CreditEntity(Long userId, long credits, CreditType creditType) {
+    public CreditEntity(Long creditId, Long userId, long credits, CreditType creditType) {
+        this.creditId = creditId;
         this.userId = userId;
         this.credits = credits;
         this.creditType = creditType;

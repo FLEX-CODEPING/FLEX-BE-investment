@@ -5,8 +5,10 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Getter
+@SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Credit {
 
@@ -16,7 +18,8 @@ public class Credit {
     private CreditType creditType;
 
     @Builder
-    public Credit(Long userId, long credits, CreditType creditType) {
+    public Credit(Long creditId, Long userId, long credits, CreditType creditType) {
+        this.creditId = creditId;
         this.userId = userId;
         this.credits = credits;
         this.creditType = creditType;

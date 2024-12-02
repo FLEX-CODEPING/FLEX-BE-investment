@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.DynamicInsert;
 
@@ -13,9 +14,10 @@ import java.math.BigDecimal;
 
 @Entity
 @Getter
+@SuperBuilder
+@DynamicInsert
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "transaction")
-@DynamicInsert
 public class TransactionEntity extends BaseTimeEntity {
 
     @Id
@@ -42,10 +44,8 @@ public class TransactionEntity extends BaseTimeEntity {
     private BigDecimal balance;
 
     @Builder
-    public TransactionEntity(
-            Long userId, InvestmentEntity investment, CreditEntity credit,
-            BigDecimal totalProfit, BigDecimal balance
-    ) {
+    public TransactionEntity(Long transactionId, Long userId, InvestmentEntity investment, CreditEntity credit, BigDecimal totalProfit, BigDecimal balance) {
+        this.transactionId = transactionId;
         this.userId = userId;
         this.investment = investment;
         this.credit = credit;

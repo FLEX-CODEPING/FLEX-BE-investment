@@ -6,11 +6,13 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
 
 @Getter
+@SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class HoldStock extends BaseTime {
 
@@ -26,9 +28,10 @@ public class HoldStock extends BaseTime {
 
     @Builder
     public HoldStock(
-            Long userId, String corpName, String stockCode,
+            Long holdStockId, Long userId, String corpName, String stockCode,
             long totalHoldings, HoldStatus holdStatus, BigDecimal avgPrice, BigDecimal principal, Investment recentInvestment
     ) {
+        this.holdStockId = holdStockId;
         this.userId = userId;
         this.corpName = corpName;
         this.stockCode = stockCode;

@@ -7,12 +7,14 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.Comment;
 
 import java.math.BigDecimal;
 
 @Entity
 @Getter
+@SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "hold_stock")
 public class HoldStockEntity extends BaseTimeEntity {
@@ -47,15 +49,16 @@ public class HoldStockEntity extends BaseTimeEntity {
     @Column(nullable = false)
     private BigDecimal principal;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recent_investment_id", nullable = false)
     private InvestmentEntity recentInvestment;
 
     @Builder
     public HoldStockEntity(
-            Long userId, String stockCode, String corpName,
+            Long holdStockId, Long userId, String stockCode, String corpName,
             long totalHoldings, HoldStatus holdStatus, InvestmentEntity recentInvestment, BigDecimal avgPrice, BigDecimal principal
     ) {
+        this.holdStockId = holdStockId;
         this.userId = userId;
         this.stockCode = stockCode;
         this.corpName = corpName;

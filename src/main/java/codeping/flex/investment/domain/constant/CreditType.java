@@ -1,5 +1,6 @@
 package codeping.flex.investment.domain.constant;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -10,14 +11,12 @@ public enum CreditType implements CodedEnum {
     ;
 
     private final String code;
-    private final String type;
 
     @Override
     public String getCode() {
         return this.code;
     }
 
-    public String getType() {
-        return this.type;
-    }
+    @Getter
+    private final String type;
 }
