@@ -24,8 +24,4 @@ public class Credit {
         this.credits = credits;
         this.creditType = creditType;
     }
-
-    public void addPoint(long amount) {
-        this.credits += amount;
-    }
 }
