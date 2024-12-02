@@ -1,7 +1,7 @@
 package codeping.flex.investment.application.service.domain;
 
-import codeping.flex.investment.adapter.in.web.data.holdstock.request.UserHoldStockRequest;
 import codeping.flex.investment.adapter.in.web.data.holdstock.response.UserHoldStockResponse;
+import codeping.flex.investment.adapter.in.web.data.pagination.CustomPageRequest;
 import codeping.flex.investment.adapter.in.web.data.pagination.CustomSliceResponse;
 import codeping.flex.investment.application.ports.in.investment.domain.HoldStockUseCase;
 import codeping.flex.investment.application.ports.out.HoldStockOutPort;
@@ -34,6 +34,12 @@ public class HoldStockService implements HoldStockUseCase {
     }
 
     @Override
+    @Transactional
+    public HoldStock saveHoldStock(HoldStock holdStock) {
+        return holdStockOutPort.saveHoldStock(holdStock);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Optional<HoldStock> getHoldStockByUserIdAndStockCode(Long userId, String stockCode) {
         return holdStockOutPort.getHoldStockByUserIdAndStockCode(userId, stockCode);
@@ -51,9 +57,9 @@ public class HoldStockService implements HoldStockUseCase {
 
     @Override
     @Transactional(readOnly = true)
-    public CustomSliceResponse<UserHoldStockResponse> getUserHoldStocks(Long userId, UserHoldStockRequest userHoldStockRequest) {
+    public CustomSliceResponse<UserHoldStockResponse> getUserHoldStocks(Long userId, HoldStatus holdStatus, CustomPageRequest userHoldStockRequest) {
         Slice<HoldStock> holdStockSlice = holdStockOutPort.getHoldStocksByUserIdAndHoldStatus(
-                userId, userHoldStockRequest.holdStatus(), userHoldStockRequest.customPageRequest().toPageRequest()
+                userId, holdStatus, userHoldStockRequest.toPageRequest()
         );
 
         List<UserHoldStockResponse> content = holdStockSlice.getContent()
@@ -77,7 +83,10 @@ public class HoldStockService implements HoldStockUseCase {
         Optional<HoldStock> holdStock = getHoldStockByUserIdAndStockCode(userId, investment.getStockCode());
 
         holdStock.ifPresentOrElse(
-                stock -> stock.buy(investment.getQuantity(), investment.getTotalPrice(), investment),
+                stock -> {
+                    stock.buy(investment.getQuantity(), investment.getTotalPrice(), investment);
+                    holdStockOutPort.saveHoldStock(stock);
+                },
                 () -> saveHoldStock(userId, investment.getStockCode(), investment.getCorpName(), investment.getQuantity(), investment)
         );
     }
