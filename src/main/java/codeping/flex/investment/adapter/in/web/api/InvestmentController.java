@@ -67,7 +67,7 @@ public class InvestmentController {
     public ApplicationResponse<CustomSliceResponse<UserStockInvestmentResponse>> getUserInvestmentsByStockCode(
             @Parameter(hidden = true) @Passport PassportInfo passportInfo,
             @Parameter(description = "종목 코드", example = "005930") @RequestParam(value = "stockCode") String stockCode,
-            @ModelAttribute CustomPageRequest customPageRequest
+            @ModelAttribute @Valid CustomPageRequest customPageRequest
     ) {
         CustomSliceResponse<UserStockInvestmentResponse> response = investmentUseCase.getUserInvestmentsByStockCode(
                 passportInfo.userId(), stockCode, customPageRequest

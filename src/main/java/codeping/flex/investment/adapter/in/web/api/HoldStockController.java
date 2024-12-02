@@ -11,6 +11,7 @@ import codeping.flex.investment.global.annotation.passport.PassportInfo;
 import codeping.flex.investment.global.common.response.ApplicationResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,7 @@ public class HoldStockController {
     public ApplicationResponse<CustomSliceResponse<UserHoldStockResponse>> getUserHoldStocks(
             @Parameter(hidden = true) @Passport PassportInfo passportInfo,
             @Parameter(description = "보유 상태 (HOLDING | SOLD)", example = "HOLDING") @RequestParam(value = "holdStatus") HoldStatus holdStatus,
-            @ModelAttribute CustomPageRequest customPageRequest
+            @ModelAttribute @Valid CustomPageRequest customPageRequest
     ) {
         CustomSliceResponse<UserHoldStockResponse> response = holdStockUseCase.getUserHoldStocks(passportInfo.userId(), holdStatus, customPageRequest);
         return ApplicationResponse.onSuccess(response);
