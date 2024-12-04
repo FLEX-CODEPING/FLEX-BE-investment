@@ -2,7 +2,9 @@ package codeping.flex.investment.adapter.in.web.api;
 
 import codeping.flex.investment.adapter.in.web.data.pagination.CustomPageRequest;
 import codeping.flex.investment.adapter.in.web.data.pagination.CustomSliceResponse;
+import codeping.flex.investment.adapter.in.web.data.transaction.response.UserTransactionSummaryResponse;
 import codeping.flex.investment.adapter.in.web.data.transaction.response.UserTransactionResponse;
+import codeping.flex.investment.application.ports.in.investment.domain.RecentTransactionUseCase;
 import codeping.flex.investment.application.ports.in.investment.domain.TransactionUseCase;
 import codeping.flex.investment.global.annotation.architecture.WebAdapter;
 import codeping.flex.investment.global.annotation.passport.Passport;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TransactionController {
 
     private final TransactionUseCase transactionUseCase;
+    private final RecentTransactionUseCase recentTransactionUseCase;
 
     @GetMapping
     @Operation(summary = "유저 거래 내역 전체 조회", description = "특정 유저의 전체 거래 내역을 조회합니다.")
@@ -32,6 +35,15 @@ public class TransactionController {
             @ModelAttribute @Valid CustomPageRequest customPageRequest
     ) {
         CustomSliceResponse<UserTransactionResponse> response = transactionUseCase.getAllUserTransactions(passportInfo.userId(), customPageRequest);
+        return ApplicationResponse.onSuccess(response);
+    }
+
+    @GetMapping("/summary")
+    @Operation(summary = "유저 보유 크레딧 및 수익 조회", description = "특정 유저가 보유한 총 크레딧 액수와 총 수익을 조회합니다.")
+    public ApplicationResponse<UserTransactionSummaryResponse> getUserTransactionSummary(
+            @Parameter(hidden = true) @Passport PassportInfo passportInfo
+    ) {
+        UserTransactionSummaryResponse response = recentTransactionUseCase.getUserTransactionSummary(passportInfo.userId());
         return ApplicationResponse.onSuccess(response);
     }
 }
