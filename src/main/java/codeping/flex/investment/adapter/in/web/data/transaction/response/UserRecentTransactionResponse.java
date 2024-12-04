@@ -1,5 +1,6 @@
 package codeping.flex.investment.adapter.in.web.data.transaction.response;
 
+import codeping.flex.investment.domain.model.RecentTransaction;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.math.BigDecimal;
@@ -16,4 +17,11 @@ public record UserRecentTransactionResponse(
         @Schema(description = "최근 거래 시간", example = "YYYY-MM-DD HH:MM:SS")
         LocalDateTime recentTransactionAt
 ) {
+        public static UserRecentTransactionResponse from(RecentTransaction recentTransaction) {
+                return new UserRecentTransactionResponse(
+                        recentTransaction.getTransaction().getBalance(),
+                        recentTransaction.getTransaction().getTotalProfit(),
+                        recentTransaction.getCreatedAt()
+                );
+        }
 }
