@@ -6,9 +6,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public record UserRecentTransactionResponse(
+public record UserTransactionSummaryResponse(
 
-        @Schema(description = "잔고", example = "1000000")
+        @Schema(description = "잔고(총 보유 크레딧)", example = "1000000")
         BigDecimal balance,
 
         @Schema(description = "총 수익", example = "500000")
@@ -17,8 +17,8 @@ public record UserRecentTransactionResponse(
         @Schema(description = "최근 거래 시간", example = "YYYY-MM-DD HH:MM:SS")
         LocalDateTime recentTransactionAt
 ) {
-        public static UserRecentTransactionResponse from(RecentTransaction recentTransaction) {
-                return new UserRecentTransactionResponse(
+        public static UserTransactionSummaryResponse from(RecentTransaction recentTransaction) {
+                return new UserTransactionSummaryResponse(
                         recentTransaction.getTransaction().getBalance(),
                         recentTransaction.getTransaction().getTotalProfit(),
                         recentTransaction.getCreatedAt()
