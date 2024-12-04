@@ -1,5 +1,6 @@
 package codeping.flex.investment.application.service.domain;
 
+import codeping.flex.investment.adapter.in.web.data.transaction.response.UserTransactionSummaryResponse;
 import codeping.flex.investment.application.ports.in.investment.domain.RecentTransactionUseCase;
 import codeping.flex.investment.application.ports.out.RecentTransactionOutPort;
 import codeping.flex.investment.domain.model.RecentTransaction;
@@ -25,10 +26,17 @@ public class RecentTransactionService implements RecentTransactionUseCase {
         return recentTransactionOutPort.saveRecentTransaction(recentTransaction);
     }
 
+
     @Override
     @Transactional(readOnly = true)
     public RecentTransaction getRecentTransactionByUserId(Long userId) {
         return findRecentTransactionOrThrow(userId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public UserTransactionSummaryResponse getUserTransactionSummary(Long userId) {
+        return UserTransactionSummaryResponse.from(findRecentTransactionOrThrow(userId));
     }
 
     @Override

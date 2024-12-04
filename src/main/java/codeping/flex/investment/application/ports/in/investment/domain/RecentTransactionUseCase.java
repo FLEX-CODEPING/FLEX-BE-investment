@@ -1,5 +1,6 @@
 package codeping.flex.investment.application.ports.in.investment.domain;
 
+import codeping.flex.investment.adapter.in.web.data.transaction.response.UserTransactionSummaryResponse;
 import codeping.flex.investment.domain.model.RecentTransaction;
 import codeping.flex.investment.domain.model.Transaction;
 
@@ -12,6 +13,7 @@ public interface RecentTransactionUseCase {
     /** GET **/
     // 최근 거래 내역 조회
     RecentTransaction getRecentTransactionByUserId(Long userId);
+    UserTransactionSummaryResponse getUserTransactionSummary(Long userId);
 
     /** UPDATE **/
     // 최근 거래 내역 업데이트
