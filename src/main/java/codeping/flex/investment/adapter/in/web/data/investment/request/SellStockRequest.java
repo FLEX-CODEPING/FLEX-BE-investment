@@ -8,10 +8,6 @@ import java.math.BigDecimal;
 
 public record SellStockRequest(
 
-        @Schema(description = "보유 종목 id", example = "1")
-        @NotNull
-        Long holdStockId,
-
         @Schema(description = "매도 수량", example = "2")
         @NotNull
         int quantity,
