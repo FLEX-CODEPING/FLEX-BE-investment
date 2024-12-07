@@ -33,4 +33,14 @@ public class HoldStockController {
         CustomSliceResponse<UserHoldStockResponse> response = holdStockUseCase.getUserHoldStocks(passportInfo.userId(), holdStatus, customPageRequest);
         return ApplicationResponse.onSuccess(response);
     }
+
+    @GetMapping("/{stockCode}")
+    @Operation(summary = "보유 종목 개별 정보 조회", description = "특정 유저의 개별 보유 종목을 정보를 조회합니다.")
+    public ApplicationResponse<UserHoldStockResponse> getUserHoldStockByStockCode(
+            @Parameter(hidden = true) @Passport PassportInfo passportInfo,
+            @Parameter(description = "종목 코드", example = "005930") @PathVariable(value = "stockCode") String stockCode
+    ) {
+        UserHoldStockResponse response = holdStockUseCase.getUserHoldStockByStockCode(passportInfo.userId(), stockCode);
+        return ApplicationResponse.onSuccess(response);
+    }
 }

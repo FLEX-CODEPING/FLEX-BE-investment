@@ -22,6 +22,8 @@ public interface HoldStockUseCase {
     HoldStock getHoldStockById(Long holdStockId);
     // 보유 종목 조회 - userId && HoldStatus
     CustomSliceResponse<UserHoldStockResponse> getUserHoldStocks(Long userId, HoldStatus holdStatus, CustomPageRequest userHoldStockRequest);
+    // 보유 종목 개별 조회
+    UserHoldStockResponse getUserHoldStockByStockCode(Long userId, String stockCode);
 
     /** UPDATE **/
     // 매수 시 보유 종목 업데이트

@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static codeping.flex.investment.application.mapper.HoldStockMapper.mapToHoldStock;
+import static codeping.flex.investment.domain.exception.HoldStockErrorCode.HOLD_STOCK_NOT_EXIST;
 import static codeping.flex.investment.domain.exception.HoldStockErrorCode.HOLD_STOCK_NOT_FOUND;
 
 @ApplicationService
@@ -68,6 +69,15 @@ public class HoldStockService implements HoldStockUseCase {
                 .toList();
 
         return CustomSliceResponse.of(content, holdStockSlice);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public UserHoldStockResponse getUserHoldStockByStockCode(Long userId, String stockCode){
+        HoldStock holdStock = holdStockOutPort.getHoldStockByUserIdAndStockCode(userId, stockCode)
+                .orElseThrow(() -> ApplicationException.from(HOLD_STOCK_NOT_EXIST));
+
+        return UserHoldStockResponse.from(holdStock);
     }
 
     /**

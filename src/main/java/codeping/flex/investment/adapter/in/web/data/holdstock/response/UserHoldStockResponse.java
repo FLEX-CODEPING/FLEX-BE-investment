@@ -33,8 +33,11 @@ public record UserHoldStockResponse(
         @Schema(description = "원금", example = "1000000")
         BigDecimal principal,
 
-        @Schema(description = "종목 코드", example = "005930")
-        LocalDateTime createdAt
+        @Schema(description = "리소스 생성 시간", example = "YYYY-MM-DD HH:MM:SS")
+        LocalDateTime createdAt,
+
+        @Schema(description = "리소스 수정 시간", example = "YYYY-MM-DD HH:MM:SS")
+        LocalDateTime modifiedAt
 ) {
     public static UserHoldStockResponse from(final HoldStock holdStock) {
         return new UserHoldStockResponse(
@@ -46,7 +49,8 @@ public record UserHoldStockResponse(
                 holdStock.getHoldStatus(),
                 holdStock.getAvgPrice(),
                 holdStock.getPrincipal(),
-                holdStock.getCreatedAt()
+                holdStock.getCreatedAt(),
+                holdStock.getModifiedAt()
         );
     }
 }
