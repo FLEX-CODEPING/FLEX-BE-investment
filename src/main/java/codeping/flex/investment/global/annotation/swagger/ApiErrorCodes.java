@@ -4,6 +4,7 @@ import codeping.flex.investment.domain.exception.HoldStockErrorCode;
 import codeping.flex.investment.domain.exception.InvestmentErrorCode;
 import codeping.flex.investment.domain.exception.RecentTransactionErrorCode;
 import codeping.flex.investment.domain.exception.TransactionErrorCode;
+import codeping.flex.investment.domain.exception.InvestmentAnalysisErrorCode;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -17,4 +18,5 @@ public @interface ApiErrorCodes {
 	RecentTransactionErrorCode[] recentTransactionErrors() default {};
 	TransactionErrorCode[] transactionErrors() default {};
 	HoldStockErrorCode[] holdStockErrors() default {};
+	InvestmentAnalysisErrorCode[] investmentAnalysisErrors() default {};
 }
