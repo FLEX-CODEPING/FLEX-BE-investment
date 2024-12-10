@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static codeping.flex.investment.global.config.openai.OpenAiPrompts.INVESTMENT_HISTORY_FORMAT;
+import static codeping.flex.investment.application.openai.prompt.OpenAiPrompts.INVESTMENT_HISTORY_FORMAT;
 
 @PersistenceAdapter
 @RequiredArgsConstructor

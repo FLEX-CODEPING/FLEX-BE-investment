@@ -1,4 +1,4 @@
-package codeping.flex.investment.global.config.openai;
+package codeping.flex.investment.application.openai.prompt;
 
 public final class OpenAiPrompts {
     private OpenAiPrompts() {

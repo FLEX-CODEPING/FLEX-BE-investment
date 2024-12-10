@@ -1,4 +1,4 @@
-package codeping.flex.investment.global.config.openai;
+package codeping.flex.investment.application.openai.data;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

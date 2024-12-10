@@ -6,7 +6,7 @@ import codeping.flex.investment.application.ports.out.InvestmentAnalysisOutPort;
 import codeping.flex.investment.global.annotation.architecture.ApplicationService;
 import codeping.flex.investment.global.common.exception.ApplicationException;
 import codeping.flex.investment.global.config.openai.OpenAiConfig;
-import codeping.flex.investment.global.config.openai.OpenAiPrompts;
+import codeping.flex.investment.application.openai.prompt.OpenAiPrompts;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.messages.SystemMessage;
