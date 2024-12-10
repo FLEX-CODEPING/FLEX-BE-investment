@@ -19,6 +19,7 @@ import org.springframework.ai.openai.api.OpenAiApi;
 import org.springframework.ai.openai.api.ResponseFormat;
 
 import java.util.List;
+import java.util.Objects;
 
 import static codeping.flex.investment.domain.exception.InvestmentAnalysisErrorCode.*;
 
@@ -67,7 +68,7 @@ public class InvestmentAnalysisService implements InvestmentAnalysisUseCase {
         try {
             // 사용자의 투자 내역 조회
             String investments = investmentAnalysisOutPort.getAllInvestmentsByUserId(userId);
-            if (investments.isEmpty()) {
+            if (Objects.equals(investments, "[]")) {
                 throw ApplicationException.from(GET_INVESTMENT_FAILED);
             }
 

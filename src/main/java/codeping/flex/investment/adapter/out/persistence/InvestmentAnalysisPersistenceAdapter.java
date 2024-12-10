@@ -23,6 +23,10 @@ public class InvestmentAnalysisPersistenceAdapter implements InvestmentAnalysisO
     @Override
     public String getAllInvestmentsByUserId(Long userId) {
         final List<InvestmentEntity> investmentEntities = this.investmentRepository.findAllByUserId(userId);
+        if (investmentEntities == null || investmentEntities.isEmpty()) {
+            return "[]";
+        }
+
         return investmentEntities.stream()
                 .map(investment -> {
                     Investment domain = this.investmentPersistenceMapper.toDomain(investment);
