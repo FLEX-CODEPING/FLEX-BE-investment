@@ -43,4 +43,9 @@ public class InvestmentAnalysisPersistenceAdapter implements InvestmentAnalysisO
                 .collect(Collectors.joining(",", "[", "]"));
     }
 
+    @Override
+    public long countInvestmentsByUserId(Long userId) {
+        return this.investmentRepository.countByUserId(userId);
+    }
+
 }

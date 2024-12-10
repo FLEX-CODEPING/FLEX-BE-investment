@@ -27,6 +27,8 @@ import static codeping.flex.investment.domain.exception.InvestmentAnalysisErrorC
 @RequiredArgsConstructor
 public class InvestmentAnalysisService implements InvestmentAnalysisUseCase {
 
+    private static final int MINIMUM_REQUIRED_TRANSCATIONS = 10;
+
     private final InvestmentAnalysisOutPort investmentAnalysisOutPort;
     private final OpenAiChatModel openAiChatModel;
     private final OpenAiConfig openAiConfig;
@@ -66,6 +68,12 @@ public class InvestmentAnalysisService implements InvestmentAnalysisUseCase {
     @Override
     public InvestmentAnalysisResponse analyzeInvestments(Long userId) {
         try {
+            // 거래 건수 확인
+            long count = investmentAnalysisOutPort.countInvestmentsByUserId(userId);
+            if (count < MINIMUM_REQUIRED_TRANSCATIONS) {
+                throw ApplicationException.from(INSUFFICIENT_INVESTMENT_DATA, MINIMUM_REQUIRED_TRANSCATIONS, count);
+            }
+
             // 사용자의 투자 내역 조회
             String investments = investmentAnalysisOutPort.getAllInvestmentsByUserId(userId);
             if (Objects.equals(investments, "[]")) {

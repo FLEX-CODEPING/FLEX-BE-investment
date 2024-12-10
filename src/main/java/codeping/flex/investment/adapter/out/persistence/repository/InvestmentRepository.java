@@ -13,4 +13,5 @@ public interface InvestmentRepository extends JpaRepository<InvestmentEntity, Lo
 
     Slice<InvestmentEntity> findAllByUserIdAndStockCode(Long userId, String stockCode, Pageable pageable);
     List<InvestmentEntity> findAllByUserId(Long userId);
+    long countByUserId(Long userId);
 }
