@@ -1,0 +1,27 @@
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVER:localhost}:${KAFKA_BOOTSTRAP_PORT:29092}
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+
+---
+spring.config.activate.on-profile: local
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:29092
+
+---
+spring.config.activate.on-profile: dev
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVER}:${KAFKA_BOOTSTRAP_PORT}
+
+---
+spring.config.activate.on-profile: prod
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVER}:${KAFKA_BOOTSTRAP_PORT}
