@@ -6,6 +6,7 @@ spring:
       - eureka.yml
       - mysql.yml
       - swagger.yml
+      - openai.yml
   application:
     name: investment-service
 

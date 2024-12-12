@@ -13,7 +13,16 @@ public class ApplicationException extends RuntimeException {
         this.code = code;
     }
 
+    public ApplicationException(BaseErrorCode code, Object... args) {
+        super(String.format(code.getMessage(), args));
+        this.code = code;
+    }
+
     public static ApplicationException from(BaseErrorCode code) {
         return new ApplicationException(code);
+    }
+
+    public static ApplicationException from(BaseErrorCode code, Object... args) {
+        return new ApplicationException(code, args);
     }
 }
