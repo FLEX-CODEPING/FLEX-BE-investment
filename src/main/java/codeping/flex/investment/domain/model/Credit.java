@@ -1,6 +1,7 @@
 package codeping.flex.investment.domain.model;
 
 import codeping.flex.investment.domain.constant.CreditType;
+import codeping.flex.investment.domain.model.common.BaseTime;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Credit {
+public class Credit extends BaseTime {
 
     private Long creditId;
     private Long userId;
