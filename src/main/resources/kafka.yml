@@ -17,11 +17,11 @@ spring.config.activate.on-profile: dev
 spring:
   kafka:
     consumer:
-      bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVER}:${KAFKA_BOOTSTRAP_PORT}
+      bootstrap-servers: ${DEV_KAFKA_BOOTSTRAP_SERVER}:${KAFKA_BOOTSTRAP_PORT}
 
 ---
 spring.config.activate.on-profile: prod
 spring:
   kafka:
     consumer:
-      bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVER}:${KAFKA_BOOTSTRAP_PORT}
+      bootstrap-servers: ${PROD_KAFKA_BOOTSTRAP_SERVER}:${KAFKA_BOOTSTRAP_PORT}
