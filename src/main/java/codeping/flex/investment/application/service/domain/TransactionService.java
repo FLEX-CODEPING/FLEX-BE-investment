@@ -18,6 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import static codeping.flex.investment.application.mapper.TransactionMapper.mapToCreditTransaction;
 import static codeping.flex.investment.application.mapper.TransactionMapper.mapToInvestmentTransaction;
@@ -59,6 +61,11 @@ public class TransactionService implements TransactionUseCase {
     @Transactional(readOnly = true)
     public List<RankingResponse> getRankings() {
         Pageable numOfRanks = PageRequest.of(0, 3);
-        return transactionOutPort.getRankings(numOfRanks);
+        List<RankingResponse> rankings = transactionOutPort.getRankings(numOfRanks);
+
+        AtomicInteger rankCounter = new AtomicInteger(1);
+        return rankings.stream()
+                .map(r -> RankingResponse.from(rankCounter.getAndIncrement(), r))
+                .collect(Collectors.toList());
     }
 }

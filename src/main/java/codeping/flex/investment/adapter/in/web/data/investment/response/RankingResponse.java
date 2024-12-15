@@ -6,6 +6,9 @@ import java.math.BigDecimal;
 
 public record RankingResponse(
 
+        @Schema(description = "순위", example = "1")
+        Integer rank,
+
         @Schema(description = "유저 id", example = "1")
         Long userId,
 
@@ -21,4 +24,14 @@ public record RankingResponse(
         @Schema(description = "총 수익", example = "500000")
         BigDecimal totalProfit
 ) {
+        public static RankingResponse from(int rank, RankingResponse response) {
+                return new RankingResponse(
+                        rank,
+                        response.userId(),
+                        response.nickname(),
+                        response.blogName(),
+                        response.profileImageUrl(),
+                        response.totalProfit()
+                );
+        }
 }

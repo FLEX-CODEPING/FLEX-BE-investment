@@ -15,7 +15,7 @@ public interface TransactionRepository extends JpaRepository<TransactionEntity, 
 
     Slice<TransactionEntity> findAllByUserId(Long userId, Pageable pageable);
 
-    @Query("SELECT new codeping.flex.investment.adapter.in.web.data.investment.response.RankingResponse(t.userId, u.userInfo.nickname, u.userInfo.blogName, u.userInfo.profileImageUrl, t.totalProfit) " +
+    @Query("SELECT new codeping.flex.investment.adapter.in.web.data.investment.response.RankingResponse(null, t.userId, u.userInfo.nickname, u.userInfo.blogName, u.userInfo.profileImageUrl, t.totalProfit) " +
             "FROM RecentTransactionEntity rt " +
             "JOIN rt.transaction t " +
             "JOIN UserEntity u ON u.userId = rt.userId " +
