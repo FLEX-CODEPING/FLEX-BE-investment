@@ -1,5 +1,6 @@
 package codeping.flex.investment.adapter.out.persistence;
 
+import codeping.flex.investment.adapter.in.web.data.investment.response.RankingResponse;
 import codeping.flex.investment.adapter.out.persistence.entity.TransactionEntity;
 import codeping.flex.investment.adapter.out.persistence.mapper.TransactionPersistenceMapper;
 import codeping.flex.investment.adapter.out.persistence.repository.TransactionRepository;
@@ -9,6 +10,8 @@ import codeping.flex.investment.global.annotation.architecture.PersistenceAdapte
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
+
+import java.util.List;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
@@ -27,5 +30,10 @@ public class TransactionPersistenceAdapter implements TransactionOutPort {
     @Override
     public Slice<Transaction> getAllTransactionsByUserId(final Long userId, Pageable pageable) {
         return this.transactionRepository.findAllByUserId(userId, pageable).map(this.transactionPersistenceMapper::toDomain);
+    }
+
+    @Override
+    public List<RankingResponse> getRankings(Pageable pageable) {
+        return transactionRepository.getRankingOrderByTotalProfit(pageable);
     }
 }

@@ -1,5 +1,6 @@
 package codeping.flex.investment.application.service.domain;
 
+import codeping.flex.investment.adapter.in.web.data.investment.response.RankingResponse;
 import codeping.flex.investment.adapter.in.web.data.pagination.CustomPageRequest;
 import codeping.flex.investment.adapter.in.web.data.pagination.CustomSliceResponse;
 import codeping.flex.investment.adapter.in.web.data.transaction.response.UserTransactionResponse;
@@ -10,13 +11,18 @@ import codeping.flex.investment.domain.model.Investment;
 import codeping.flex.investment.domain.model.Transaction;
 import codeping.flex.investment.global.annotation.architecture.ApplicationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
-import static codeping.flex.investment.application.mapper.TransactionMapper.*;
+import static codeping.flex.investment.application.mapper.TransactionMapper.mapToCreditTransaction;
+import static codeping.flex.investment.application.mapper.TransactionMapper.mapToInvestmentTransaction;
 
 @ApplicationService
 @RequiredArgsConstructor
@@ -49,5 +55,17 @@ public class TransactionService implements TransactionUseCase {
                 .toList();
 
         return CustomSliceResponse.of(content, transactionSlice);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<RankingResponse> getRankings() {
+        Pageable numOfRanks = PageRequest.of(0, 3);
+        List<RankingResponse> rankings = transactionOutPort.getRankings(numOfRanks);
+
+        AtomicInteger rankCounter = new AtomicInteger(1);
+        return rankings.stream()
+                .map(r -> RankingResponse.from(rankCounter.getAndIncrement(), r))
+                .collect(Collectors.toList());
     }
 }
