@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum CreditType implements CodedEnum {
 
-    SIGNUP("01", "회원가입"),
-    INITIAL_POST("02", "첫 게시물"),
+    SIGNUP("1", "회원가입"),
+    INITIAL_POST("2", "첫 게시물"),
     ;
 
     private final String code;
