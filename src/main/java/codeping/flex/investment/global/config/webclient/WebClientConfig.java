@@ -3,6 +3,7 @@ package codeping.flex.investment.global.config.webclient;
 import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.reactive.ClientHttpConnector;
@@ -16,6 +17,9 @@ import java.util.function.Function;
 
 @Configuration
 public class WebClientConfig {
+
+    @Value("${webclient.base-url}") // YAML에서 설정한 base-url을 주입받습니다.
+    private String baseUrl;
 
     @Bean
     public ReactorResourceFactory resourceFactory() {
@@ -32,6 +36,8 @@ public class WebClientConfig {
 
         ClientHttpConnector connector = new ReactorClientHttpConnector(resourceFactory(), mapper);
 
-        return WebClient.builder().clientConnector(connector).build();
+        return WebClient.builder()
+                .baseUrl(baseUrl)
+                .clientConnector(connector).build();
     }
 }
