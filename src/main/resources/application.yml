@@ -20,7 +20,7 @@ server:
       min-spare: 20
 
 webclient:
-  base-url: {WEBCLIENT_BASE_URL}
+  base-url: ${WEBCLIENT_BASE_URL}
 ---
 spring.config.activate.on-profile: local
 spring:
