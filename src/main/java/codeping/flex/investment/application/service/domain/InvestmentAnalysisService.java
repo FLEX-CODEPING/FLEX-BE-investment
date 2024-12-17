@@ -39,14 +39,14 @@ public class InvestmentAnalysisService implements InvestmentAnalysisUseCase {
      * @param investments 분석할 투자 내역 JSON 문자열
      * @return OpenAI API 요청을 위한 Prompt 객체
      */
-    private Prompt createAnlasisPrompt(String investments) {
+    private Prompt createAnlasisPrompt(String investments, String[] fluctuation) {
         // 투자 내역 분석을 위한 JSON 스키마 설정
         var jsonSchema = openAiConfig.inputConverter().getJsonSchema();
 
         // 시스템 메시지와 사용자 메시지를 생성
         Message systemMessage = new SystemMessage(OpenAiPrompts.INVESTMENT_ANALYSIS_SYSTEM_MESSAGE);
         Message userMessage = new UserMessage(
-                String.format(OpenAiPrompts.INVESTMENT_ANALYSIS_USER_MESSAGE, investments)
+                String.format(OpenAiPrompts.INVESTMENT_ANALYSIS_USER_MESSAGE, investments, fluctuation[0], fluctuation[1], fluctuation[2])
         );
 
         // 프롬프트 생성
@@ -80,10 +80,18 @@ public class InvestmentAnalysisService implements InvestmentAnalysisUseCase {
                 throw ApplicationException.from(GET_INVESTMENT_FAILED);
             }
 
+            // 시장 트렌드 데이터 조회
+            String[] fluctuation;
+            try {
+                fluctuation = investmentAnalysisOutPort.getTrend();
+            } catch (Exception e) {
+                throw ApplicationException.from(GET_STOCK_RANKING_FAILED);
+            }
+
             Prompt prompt;
             try {
                 // OpenAI API 요청을 위한 프롬프트 생성
-                prompt = createAnlasisPrompt(investments);
+                prompt = createAnlasisPrompt(investments, fluctuation);
             } catch (Exception e) {
                 throw ApplicationException.from(PROMPT_GENERATION_FAILED);
             }
