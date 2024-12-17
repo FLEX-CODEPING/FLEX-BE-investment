@@ -27,9 +27,13 @@ spring:
   config:
     import: classpath:env.properties
 
-
 ---
 spring.config.activate.on-profile: dev
+
+logging:
+  level:
+    root: INFO
+    codeping.flex.investment: DEBUG
 
 ---
 spring.config.activate.on-profile: prod
