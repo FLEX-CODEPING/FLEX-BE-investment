@@ -19,11 +19,14 @@ server:
       max: 200
       min-spare: 20
 
+webclient:
+  base-url: {WEBCLIENT_BASE_URL}
 ---
 spring.config.activate.on-profile: local
 spring:
   config:
     import: classpath:env.properties
+
 
 ---
 spring.config.activate.on-profile: dev
