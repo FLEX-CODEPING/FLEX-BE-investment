@@ -3,12 +3,13 @@ package codeping.flex.investment.adapter.out.webclient.data.response;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Collections;
 import java.util.List;
 
 @Getter
 @NoArgsConstructor
 public class StockVolumeRankingResponse extends CommonResponse {
-    private List<VolumeRanking> result;
+    private final List<VolumeRanking> result = Collections.emptyList();
 
     @Getter
     @NoArgsConstructor
