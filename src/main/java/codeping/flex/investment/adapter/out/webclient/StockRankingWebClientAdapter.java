@@ -7,6 +7,7 @@ import codeping.flex.investment.adapter.out.webclient.data.request.StockFluctuat
 import codeping.flex.investment.adapter.out.webclient.data.request.StockMarketCapRankingRequest;
 import codeping.flex.investment.adapter.out.webclient.data.request.StockVolumeRankingRequest;
 import codeping.flex.investment.application.ports.out.StockRankingPort;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -20,18 +21,22 @@ public class StockRankingWebClientAdapter implements StockRankingPort {
     private static final String VOLUME_PATH = "/api/kis/stocks/ranking/volume";
     private static final String MARKET_CAP_PATH = "/api/kis/stocks/ranking/market-cap";
 
-    public StockRankingWebClientAdapter(WebClient.Builder webClientBuilder) {
-        this.stockWebClient = webClientBuilder.baseUrl("http://your.api.base.url").build();
+    public StockRankingWebClientAdapter(WebClient.Builder webClientBuilder, @Value("${webclient.base-url}") String baseUrl) {
+        this.stockWebClient = webClientBuilder.baseUrl(baseUrl).build();
     }
 
     @Override
-    public Mono<StockFluctuationRankingResponse> getfluctuationRanking(StockFluctuationRankingRequest stockFluctuationRankingRequest) {
+    public Mono<StockFluctuationRankingResponse> getFluctuationRanking(StockFluctuationRankingRequest stockFluctuationRankingRequest) {
         return stockWebClient
                 .post()
                 .uri(FLUCTUATION_PATH)
-                .body(Mono.just(stockFluctuationRankingRequest), StockFluctuationRankingRequest.class)
+                .bodyValue(stockFluctuationRankingRequest)
                 .retrieve()
-                .bodyToMono(StockFluctuationRankingResponse.class);
+                .bodyToMono(StockFluctuationRankingResponse.class)
+                .doOnError(e -> {
+                    System.out.println("등락율 순위 조회 실패 - Request: " + stockFluctuationRankingRequest + ", Error: " + e.getMessage());
+                })
+                .onErrorResume(e -> Mono.just(new StockFluctuationRankingResponse()));
     }
 
     @Override
@@ -39,9 +44,13 @@ public class StockRankingWebClientAdapter implements StockRankingPort {
         return stockWebClient
                 .post()
                 .uri(VOLUME_PATH)
-                .body(Mono.just(stockVolumeRankingRequest), StockVolumeRankingRequest.class)
+                .bodyValue(stockVolumeRankingRequest)
                 .retrieve()
-                .bodyToMono(StockVolumeRankingResponse.class);
+                .bodyToMono(StockVolumeRankingResponse.class)
+                .doOnError(e -> {
+                    System.out.println("거래량 순위 조회 실패 - Request: " + stockVolumeRankingRequest + ", Error: " + e.getMessage());
+                })
+                .onErrorResume(e -> Mono.just(new StockVolumeRankingResponse()));
     }
 
     @Override
@@ -49,8 +58,12 @@ public class StockRankingWebClientAdapter implements StockRankingPort {
         return stockWebClient
                 .post()
                 .uri(MARKET_CAP_PATH)
-                .body(Mono.just(stockMarketCapRankingRequest), StockMarketCapRankingRequest.class)
+                .bodyValue(stockMarketCapRankingRequest)
                 .retrieve()
-                .bodyToMono(StockMarketCapRankingResponse.class);
+                .bodyToMono(StockMarketCapRankingResponse.class)
+                .doOnError(e -> {
+                    System.out.println("시가총액 순위 조회 실패 - Request: " + stockMarketCapRankingRequest + ", Error: " + e.getMessage());
+                })
+                .onErrorResume(e -> Mono.just(new StockMarketCapRankingResponse()));
     }
 }

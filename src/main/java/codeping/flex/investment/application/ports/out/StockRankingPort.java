@@ -9,7 +9,7 @@ import codeping.flex.investment.adapter.out.webclient.data.request.StockVolumeRa
 import reactor.core.publisher.Mono;
 
 public interface StockRankingPort {
-    Mono<StockFluctuationRankingResponse> getfluctuationRanking(StockFluctuationRankingRequest stockFluctuationRankingRequest);
+    Mono<StockFluctuationRankingResponse> getFluctuationRanking(StockFluctuationRankingRequest stockFluctuationRankingRequest);
     Mono<StockVolumeRankingResponse> getVolumeRanking(StockVolumeRankingRequest stockVolumeRankingRequest);
     Mono<StockMarketCapRankingResponse> getMarketCapRanking(StockMarketCapRankingRequest stockMarketCapRankingRequest);
 }
