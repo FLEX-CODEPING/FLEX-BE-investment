@@ -90,6 +90,12 @@ dependencies {
 
     // Kafka
     implementation 'org.springframework.kafka:spring-kafka'
+
+    // Kubernetes
+    implementation 'org.springframework.cloud:spring-cloud-starter-kubernetes-client'
+
+    // Spring actuator
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 }
 
 dependencyManagement {
