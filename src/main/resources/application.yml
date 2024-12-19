@@ -3,7 +3,6 @@ spring.profiles.active: local
 spring:
   config:
     import:
-      - eureka.yml
       - mysql.yml
       - swagger.yml
       - openai.yml
@@ -21,20 +20,35 @@ server:
 
 webclient:
   base-url: ${WEBCLIENT_BASE_URL}
+
 ---
 spring.config.activate.on-profile: local
 spring:
   config:
-    import: classpath:env.properties
+    import:
+      - eureka.yml
+      - optional:classpath:env.properties
 
 ---
 spring.config.activate.on-profile: dev
-
+spring:
+  config:
+    import:
+      - eureka.yml
 logging:
   level:
     root: INFO
-    codeping.flex.investment: DEBUG
+    com.netflix.discovery: DEBUG
+    org.springframework.cloud.netflix.eureka: DEBUG
 
 ---
 spring.config.activate.on-profile: prod
-
+spring:
+  cloud:
+    kubernetes:
+      discovery:
+        enabled: true
+        all-namespaces: true
+eureka:
+  client:
+    enabled: false
