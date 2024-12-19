@@ -3,23 +3,37 @@ spring.profiles.active: local
 spring:
   config:
     import:
+      - eureka.yml
       - mysql.yml
+      - swagger.yml
+      - openai.yml
+      - kafka.yml
   application:
     name: investment-service
 
 server:
-  port: ${APPLICATION_PORT:8083}
+  port: ${APPLICATION_PORT:8084}
   tomcat:
     max-connections: 10000
     threads:
       max: 200
       min-spare: 20
 
+webclient:
+  base-url: ${WEBCLIENT_BASE_URL}
 ---
 spring.config.activate.on-profile: local
+spring:
+  config:
+    import: classpath:env.properties
 
 ---
 spring.config.activate.on-profile: dev
+
+logging:
+  level:
+    root: INFO
+    codeping.flex.investment: DEBUG
 
 ---
 spring.config.activate.on-profile: prod
