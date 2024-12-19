@@ -7,7 +7,7 @@ pipeline {
         GITHUB_TOKEN = credentials('github-access-token')
         SSH_CREDENTIALS = credentials('flex-server-pem')
         SLACK_CHANNEL = '#backend-jenkins'
-        IMAGE_NAME = "${DOCKER_USERNAME}/flex-be-prod-blog"
+        IMAGE_NAME = "${DOCKER_USERNAME}/flex-be-prod-investment"
         IMAGE_TAG = "${BUILD_NUMBER}"
     }
 
